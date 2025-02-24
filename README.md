@@ -24,3 +24,6 @@ Fit Lover es una aplicación web diseñada para ofrecer rutinas de entrenamiento
 ### QA
 - Agostina Belen Roggero (PM)
 - Lorena Morón
+
+
+test
