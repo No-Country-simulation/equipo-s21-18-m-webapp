@@ -1,12 +1,25 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { dataProviders } from './config/database.providers';
+import { ExercisesModule } from './exercises/exercises/exercises.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
-  imports: [],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (config: ConfigService) => ({
+        uri: config.get<string>('DATABASE_STRING')
+      }),
+      inject: [ConfigService]
+    }),
+    ExercisesModule, 
+    
+  ],
   controllers: [AppController,],
-  providers: [AppService, ...dataProviders],
-  exports: [...dataProviders]
+  providers: [AppService],
+  exports: []
 })
 export class AppModule {}
