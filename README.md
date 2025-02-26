@@ -12,7 +12,7 @@ Fit Lover es una aplicación web diseñada para ofrecer rutinas de entrenamiento
 ## 🔗 Deployment
  Deployment Backend: https://equipo-s21-18-m-webapp.onrender.com/
 
- Deployment Frontend: en construcción 🛠️
+ Deployment Frontend: https://fitlover.vercel.app/
 
 ## 👥 Integrantes del equipo
 
