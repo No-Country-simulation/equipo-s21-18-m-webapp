@@ -1,7 +1,7 @@
 export default function Logo({width, height}) {
     return (
       <>
-        <div className="w-[1.5rem] h-[1.5rem]">
+        <div className="w-[1.5rem] h-[1.5rem] bg-[#fae0d6]">
         <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
  viewBox="0 0 526.000000 515.000000"
  preserveAspectRatio="xMidYMid meet">

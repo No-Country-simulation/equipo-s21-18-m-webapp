@@ -32,11 +32,11 @@ export default function Register() {
     <>
       <div className="w-full font-inter">
         <form onSubmit={onSubmit} className="w-[350px] flex flex-col mx-auto py-14" noValidate>
-          <h1 className="text-2xl leading-8 font-semibold tracking-tight text-center">Create an account</h1>
-          <p className="text-sm text-[#737373] leading-5 mt-2 mb-6">Enter your details below to create your account</p>
+          <h1 className="text-2xl leading-8 font-semibold tracking-tight text-center">Crea una cuenta</h1>
+          <p className="text-sm text-[#737373] leading-5 mt-2 mb-6 text-center">Ingresa tus datos para crear tu cuenta</p>
           
           {/* Name */}
-          <label className="text-sm font-medium leading-none py-2">Name</label>
+          <label className="text-sm font-medium leading-none py-2">nombre</label>
           <input
             className="h10 w-full rounded-md border border-[#e4e4e4] px-3 py-2 text-sm"
             id="name"
@@ -68,12 +68,12 @@ export default function Register() {
           )}
 
           {/* Email */}
-          <label className="text-sm font-medium leading-none py-2">Email</label>
+          <label className="text-sm font-medium leading-none py-2">Correo</label>
           <input
             className="h10 w-full rounded-md border border-[#e4e4e4] px-3 py-2 text-sm"
             id="email"
             type="text"
-            placeholder="m@example.com"
+            placeholder="m@ejemplo.com"
             {...register("email", {
               required: {
                 value: true,
@@ -93,7 +93,7 @@ export default function Register() {
           )}
 
           {/* Password */}
-          <label className="text-sm font-medium leading-none py-2">Password</label>
+          <label className="text-sm font-medium leading-none py-2">Contraseña</label>
           <input
             className="h10 w-full rounded-md border border-[#e4e4e4] px-3 py-2 text-sm"
             id="password"
@@ -125,7 +125,7 @@ export default function Register() {
             </span>
           )}
 
-          <button className="text-sm font-medium text-white py-2 px-4 my-4 bg-primary rounded-[6px]">Create account</button>
+          <button className="text-sm font-medium text-white py-2 px-4 my-4 bg-primary rounded-[6px]">Crear cuenta</button>
         </form>
       </div>
     </>
