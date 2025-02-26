@@ -3,7 +3,7 @@ export default function Login() {
         <>
             <section>
                 <h1>Welcome back</h1>
-                <p>Enter your credentials to access your account</p>
+                <p>Enter your credentials to access your account.</p>
                 <form>
                     <span>Email</span>
                     <input />
