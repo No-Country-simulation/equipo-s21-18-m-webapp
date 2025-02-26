@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Auto commit
+.ai.env
+auto_commit.sh
