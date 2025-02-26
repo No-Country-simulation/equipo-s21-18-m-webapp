@@ -1,13 +1,29 @@
 import { Link } from 'react-router-dom';
+import noImg from '../assets/no-image.svg';
 
 export const ExerciseDetail = () => {
   return (
     <div className='container mx-auto py-10'>
       <Link to={'/exercises'}>
-        <button className='inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 mb-6'>
-          ← Back to Exercises
+        <button className='inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border-gray-200 text-sm font-medium transition-colors border  hover:bg-gray-100 hover:text-accent-foreground h-10 px-4 py-2 mb-6'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+            className='h-6 w-6'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth='1'
+              d='M7 16l-4-4m0 0l4-4m-4 4h18'
+            ></path>
+          </svg>
+          <span className='ml-1 text-sm font-medium'>Back</span>
         </button>
       </Link>
+
       <div className='grid md:grid-cols-2 gap-10'>
         <div>
           <h1 className='text-4xl font-bold mb-4'>Push-ups</h1>
@@ -33,7 +49,7 @@ export const ExerciseDetail = () => {
             <li>Triceps</li>
             <li>Core</li>
           </ul>
-          <button className='inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50  h-10 px-4 py-2 bg-[#b50d50] text-white hover:bg-[#e51065]'>
+          <button className='inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors h-10 px-4 py-2 bg-[#b50d50] text-white hover:bg-[#e51065]'>
             Add to Workout
           </button>
         </div>
@@ -46,7 +62,7 @@ export const ExerciseDetail = () => {
             decoding='async'
             data-img='1'
             className='rounded-lg object-cover w-full h-auto'
-            src=''
+            src={noImg}
           />
         </div>
       </div>
