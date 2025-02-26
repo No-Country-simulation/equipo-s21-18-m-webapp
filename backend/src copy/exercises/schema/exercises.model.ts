@@ -12,7 +12,7 @@ export class Exercises extends Document {
     @Prop()
     image: string;
 
-    @Prop()
+    @Prop({enum: ['Para el hogar', 'Para el gimnasio']})
     type: string;
     
     @Prop()
