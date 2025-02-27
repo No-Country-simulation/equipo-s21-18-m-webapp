@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/user/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
+import { ExercisesModule } from './exercises/exercises/exercises.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ConfigModule } from '@nestjs/config';
       secret: 'equipo-s21-18', // Usa la misma clave secreta que en AuthModule
       signOptions: { expiresIn: '1h' },
     }),
+    ExercisesModule
   ],
   controllers: [AppController],
   providers: [AppService],
