@@ -13,7 +13,7 @@ export default function Home() {
                     <div class="flex items-center justify-center rounded-lg">
                         <img className="w-[150px] h-[150px]" src={logo_grande} />
                     </div>
-                    <h1 class="font-bold text-5xl sm:text-5xl md:text-6xl lg:text-5xl ">Su viaje hacia <span style={{ color: "#b50d50" }}> la excelencia en el fitness</span></h1>
+                    <h1 class="font-bold text-5xl sm:text-5xl md:text-6xl lg:text-5xl ">Su viaje hacia <span style={{ color: "#b50d50" }}> la excelencia en el fitness.-</span></h1>
                     <p class="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">Únase a nuestra comunidad de entusiastas del fitness. Obtenga entrenamientos personalizados, realice un seguimiento de su progreso y alcance sus objetivos de fitness con la orientación de expertos.</p>
                     <div className="space-x-4">
                         <button className="text-sm font-medium text-white py-2 px-4 my-4 bg-primary rounded-[6px]">Empieza tu viaje</button>
