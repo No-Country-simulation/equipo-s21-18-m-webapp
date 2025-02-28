@@ -1,7 +1,19 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import axios from "axios";
 
 export default function Register() {
+
+  {/* Funcion de peticion */}
+  const authRegistro = async (dataUser) => {
+    const RUTA = `https://equipo-s21-18-m-webapp.onrender.com/users/register`;
+    try {
+      const { data } = await axios.post(RUTA, dataUser);
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
   
   const [error,setError]= useState({
     state:false,
@@ -18,15 +30,54 @@ export default function Register() {
 
   const onSubmit = handleSubmit(async (data) => {
     const body = {
-      name: data.name,
       email: data.email,
       password: data.password,
+      role: "user"
     };
 
     try {
       setLoading(true);
-    } catch (error) {}
+      const rta = await authRegistro(body)
+      console.log(rta)
+    } catch (error) {
+      setLoading(false);
+      handleError(error)
+        setTimeout(()=>{
+          resetError()
+        },3000)
+    } finally {
+      setLoading(false);
+    }
   });
+
+  const handleError = (error) => {
+    if(error.detail){
+      if(error.detail.password){
+        const rta = error.detail.password
+        setError({
+          state:true,
+          msg:rta
+        })
+      }else{
+        setError({
+          state:true,
+          msg:'algo salio mal,intentalo mas tarde'
+        })
+      }
+    }else{
+      setError({
+        state:true,
+        msg:error.message
+      })
+    }
+  };
+
+  const resetError =()=>{
+    setError({
+      state:false,
+      msg:''
+    })
+  }
 
   return (
     <>
@@ -36,7 +87,7 @@ export default function Register() {
           <p className="text-sm text-[#737373] leading-5 mt-2 mb-6 text-center">Ingresa tus datos para crear tu cuenta</p>
           
           {/* Name */}
-          <label className="text-sm font-medium leading-none py-2">nombre</label>
+          <label className="text-sm font-medium leading-none py-2">Nombre</label>
           <input
             className="h10 w-full rounded-md border border-[#e4e4e4] px-3 py-2 text-sm"
             id="name"
@@ -125,7 +176,11 @@ export default function Register() {
             </span>
           )}
 
-          <button className="text-sm font-medium text-white py-2 px-4 my-4 bg-primary rounded-[6px]">Crear cuenta</button>
+          <button disabled={loading} className="text-sm font-medium text-white py-2 px-4 my-4 bg-primary rounded-[6px] cursor-pointer">
+            {
+              loading ? <span>cargando....</span> : <span>Crear cuenta</span>
+            }
+          </button>
         </form>
       </div>
     </>
