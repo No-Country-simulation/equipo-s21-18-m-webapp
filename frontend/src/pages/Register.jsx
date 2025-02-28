@@ -85,7 +85,7 @@ export default function Register() {
         <form onSubmit={onSubmit} className="w-[350px] flex flex-col mx-auto py-14" noValidate>
           <h1 className="text-2xl leading-8 font-semibold tracking-tight text-center">Crea una cuenta</h1>
           <p className="text-sm text-[#737373] leading-5 mt-2 mb-6 text-center">Ingresa tus datos para crear tu cuenta</p>
-          
+
           {/* Name */}
           <label className="text-sm font-medium leading-none py-2">Nombre</label>
           <input
