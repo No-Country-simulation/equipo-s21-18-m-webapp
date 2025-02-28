@@ -25,8 +25,8 @@ export default function Navbar() {
         </div>
 
         <div className="flex gap-4">
-          <Link to={"/login"} className="h-[2.25rem] px-3 content-center">Login</Link>
-          <Link to={"/register"} className="bg-primary text-white h-[2.25rem] px-3 content-center rounded-[6px] ">Sing Up</Link>
+          <Link to={"/login"} className="h-[2.25rem] px-3 content-center">Iniciar sesión</Link>
+          <Link to={"/register"} className="bg-primary text-white h-[2.25rem] px-3 content-center rounded-[6px] ">Registrarse</Link>
         </div>
       </div>
     </>
