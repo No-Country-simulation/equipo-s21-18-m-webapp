@@ -16,6 +16,9 @@ export default function Navbar() {
               <Link to={"/exercises"}>Exercises</Link>
             </li>
             <li>
+              <Link to={"/routines"}>Routines</Link>
+            </li>
+            <li>
               <Link to={"/dashboard"}>Dashboard</Link>
             </li>
             <li>
