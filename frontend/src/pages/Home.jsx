@@ -8,7 +8,7 @@ import expertos from "../assets/img/expertos.png"
 export default function Home() {
     return (
         <>
-            <section class="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
+            <section class="flex justify-center space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
                 <div class="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
                     <div class="flex items-center justify-center rounded-lg">
                         <img className="w-[150px] h-[150px]" src={logo_grande} />
