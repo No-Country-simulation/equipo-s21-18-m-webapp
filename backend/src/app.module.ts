@@ -10,6 +10,7 @@ import { ExercisesModule } from './exercises/exercises/exercises.module';
 import { ProfilesModule } from './profiles/profile/profiles.module';
 import { TagsModule } from './tags/tags/tags.module';
 import { CategoriesModule } from './categories/categories/categories.module';
+import { RoutinesModule } from './routines/routine/routines.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { CategoriesModule } from './categories/categories/categories.module';
     ExercisesModule,
     ProfilesModule,
     TagsModule,
-    CategoriesModule
+    CategoriesModule,
+    RoutinesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

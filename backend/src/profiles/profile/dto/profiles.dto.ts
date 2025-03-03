@@ -1,12 +1,22 @@
-import { IsString, IsNumber, Min, Max, IsMongoId, IsOptional } from 'class-validator';
+import {
+  IsString,
+  IsNumber,
+  Min,
+  Max,
+  IsMongoId,
+  IsOptional,
+  IsArray,
+  IsEnum,
+} from 'class-validator';
+import { PartialType } from '@nestjs/mapped-types';
 
 export class CreateProfileDto {
   @IsString()
   fullname: string;
 
+  @IsArray()
   @IsMongoId({ each: true })
-  @IsOptional()
-  exercises_id?: string[];
+  routines_id: string[];
 
   @IsNumber()
   @Min(16)
@@ -24,6 +34,18 @@ export class CreateProfileDto {
   @IsMongoId()
   @IsOptional()
   goals?: string;
+
+  @IsMongoId()
+  user_id: string;
+
+  @IsEnum([
+    'sedentario',
+    'ligeramente_activo',
+    'moderadamente_activo',
+    'muy_activo',
+    'extremadamente_activo',
+  ])
+  level: string;
 }
 
-export class UpdateProfileDto extends CreateProfileDto {}
+export class UpdateProfileDto extends PartialType(CreateProfileDto) {}
