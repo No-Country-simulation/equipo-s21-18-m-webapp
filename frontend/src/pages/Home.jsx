@@ -18,7 +18,7 @@ export default function Home() {
                     <p className="max-w-[40rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">Únase a nuestra comunidad de entusiastas del fitness. Obtenga entrenamientos personalizados, realice un seguimiento de su progreso y alcance sus objetivos de fitness con la orientación de expertos.</p>
                     <div className="space-x-4">
                         <a href="/register">
-                            <button className="text-sm font-medium text-white py-2 px-4 my-4 bg-primary rounded-[6px] hover: bg-accent">Empieza tu viaje</button>
+                            <button className="text-sm font-medium text-white py-2 px-4 my-4 bg-primary rounded-[6px] hover: bg-accent cursor-pointer">Empieza tu viaje</button>
                         </a>
                         <a href="/exercises">
                             <button className="text-sm font-medium text-black py-2 px-4 my-4 bg-white rounded-[6px] border hover:bg-gray-300">Explorar ejercicios</button>
@@ -87,10 +87,10 @@ export default function Home() {
                         <p>Únase a miles de entusiastas del fitness y comience su transformación con nuestros planes de entrenamiento integrales y orientación experta.</p>
                         <div className="space-x-4">
                             <a href="/register">
-                                <button className="text-sm font-medium text-white py-2 px-4 my-4 bg-primary rounded-[6px] hover: bg-accent">Empieza tu viaje</button>
+                                <button className="text-sm font-medium text-white py-2 px-4 my-4 bg-primary rounded-[6px] hover: bg-accent cursor-pointer">Empieza tu viaje</button>
                             </a>
                             <a href="/exercises">
-                                <button className="text-sm font-medium text-black py-2 px-4 my-4 bg-white rounded-[6px] border hover:bg-gray-300">Explorar ejercicios</button>
+                                <button className="text-sm font-medium text-black py-2 px-4 my-4 bg-white rounded-[6px] border hover:bg-gray-300 cursor-pointer">Explorar ejercicios</button>
                             </a>
                         </div>
                     </div>
