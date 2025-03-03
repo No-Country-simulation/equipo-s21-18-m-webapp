@@ -68,7 +68,7 @@ export default function Login() {
     } else {
       setError({
         state: true,
-        msg: error.message,
+        msg: "Error desconocido: " + error.message,
       });
     }
   };
@@ -152,6 +152,14 @@ export default function Login() {
               {errors.password.message}
             </span>
           )}
+
+
+          {/* Error Message */}
+          
+          {error.state && <span className="block text-xs text-red-600 mt-2">{error.msg}</span>}
+
+          
+          {/* Spinner de carga */}
 
           {loading ? (
             <Spinner />
