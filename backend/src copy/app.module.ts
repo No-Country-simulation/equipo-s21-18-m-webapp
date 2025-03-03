@@ -7,6 +7,9 @@ import { UsersModule } from './users/user/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
 import { ExercisesModule } from './exercises/exercises/exercises.module';
+import { CategoriesController } from './categories/categories/categories.controller';
+import { CategoriesService } from './categories/categories/categories.service';
+import { CategoriesModule } from './categories/categories/categories.module';
 
 @Module({
   imports: [
@@ -18,7 +21,8 @@ import { ExercisesModule } from './exercises/exercises/exercises.module';
       secret: 'equipo-s21-18', // Usa la misma clave secreta que en AuthModule
       signOptions: { expiresIn: '1h' },
     }),
-    ExercisesModule
+    ExercisesModule,
+    CategoriesModule
   ],
   controllers: [AppController],
   providers: [AppService],
