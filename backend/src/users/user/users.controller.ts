@@ -1,8 +1,9 @@
 import { Controller, Post, Patch, Delete, Body, BadRequestException, UseGuards, Get, Req, ForbiddenException, Param } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { CreateUserDto } from './dto/create-user.dto'; 
-import { UpdateUserDto } from './dto/update-user.dto'; 
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { Types } from 'mongoose';
 
 @Controller('users') // Define el controlador para las rutas bajo el prefijo 'users'
 export class UsersController {
@@ -59,19 +60,25 @@ export class UsersController {
         @Body() updateUserDto: UpdateUserDto, // Usa la DTO para validar los datos de entrada
         @Req() req
     ) {
-        // Busca el usuario por ID
-        const user = await this.usersService.findById(id);
-        if (!user) {
-            throw new BadRequestException('User not found');
+        // Verifica permisos
+        if (req.user.id !== id && req.user.role !== 'admin') {
+            throw new ForbiddenException('You can only update your own profile');
         }
 
-        // Verifica si se intenta cambiar el rol y si el usuario autenticado es un administrador
+        // Verifica si se intenta cambiar el rol
         if (updateUserDto.role && req.user.role !== 'admin') {
             throw new ForbiddenException('Only admins can change roles');
         }
 
         // Actualiza la información del usuario
-        return await this.usersService.updateUser(id, updateUserDto);
+        const updatedUser = await this.usersService.updateUser(id, updateUserDto);
+
+        // Si no se encuentra el usuario, lanza una excepción
+        if (!updatedUser) {
+            throw new BadRequestException('User not found');
+        }
+
+        return updatedUser;
     }
 
     // Endpoint para eliminar un usuario (solo accesible por administradores)
