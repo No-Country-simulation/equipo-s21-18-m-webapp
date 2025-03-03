@@ -1,9 +1,8 @@
-import { Injectable, Inject, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Model, ObjectId } from 'mongoose';
-import { Exercises, ExercisesSchema } from '../schema/exercises.model';
-import { CreateExerciseDto, UpdateExerciseDto } from './dtos/dtos/exercises.dto';
+import { Exercises } from '../schema/exercises.model';
+import { CreateExerciseDto, UpdateExerciseDto } from '../exercises/dtos/dtos/exercises.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { normalize } from 'path';
 
 @Injectable()
 export class ExercisesService {

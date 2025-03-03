@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ExercisesModule } from './exercises/exercises/exercises.module';
 import { ProfilesModule } from './profiles/profile/profiles.module';
 import { TagsModule } from './tags/tags/tags.module';
+import { CategoriesModule } from './categories/categories/categories.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { TagsModule } from './tags/tags/tags.module';
     ExercisesModule,
     ProfilesModule,
     TagsModule,
+    CategoriesModule
   ],
   controllers: [AppController],
   providers: [AppService],
