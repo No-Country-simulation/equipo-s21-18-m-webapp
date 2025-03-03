@@ -80,7 +80,7 @@ export default function Home() {
                 </div>
             </section>
             <section class="bg-[#ff9d9d]/20 container px-8 py-8 md:py-12 lg:py-2">
-                <div class="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px] ">
+                <div class="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
                     <img className="" src={libre}></img>
                     <div class="flex flex-col justify-center space-y-4">
                         <h1 class="font-bold text-3xl sm:text-5xl md:text-6xl lg:text-5xl ">Comience su viaje de acondicionamiento físico hoy</h1>
