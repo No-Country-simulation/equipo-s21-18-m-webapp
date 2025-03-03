@@ -31,10 +31,11 @@ export default function Register() {
   } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
-    const body = {
+    console.log("Datos enviados:", data);
+    const body = { 
+      name : data.name,
       email: data.email,
       password: data.password,
-      role: "user",
     };
 
     try {
