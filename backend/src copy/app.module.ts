@@ -8,6 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
 import { ExercisesModule } from './exercises/exercises/exercises.module';
 import { ProfilesModule } from './profiles/profile/profiles.module';
+import { CategoriesModule } from './categories/categories/categories.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ProfilesModule } from './profiles/profile/profiles.module';
     }),
     ExercisesModule,
     ProfilesModule,
+    CategoriesModule
   ],
   controllers: [AppController],
   providers: [AppService],
