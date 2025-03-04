@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsNumber, IsPositive } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber, IsPositive, IsArray, IsMongoId, IsOptional } from 'class-validator';
 import { Type } from 'class-transformer';
 import { PartialType } from '@nestjs/mapped-types';
 
@@ -10,6 +10,14 @@ export class CreateExerciseDto{
     @IsString()
     @IsNotEmpty()
     description: string;
+
+    @IsString()
+    @IsNotEmpty()
+    instructions: string;
+
+    @IsString()
+    @IsNotEmpty()
+    benefits: string;
 
     @IsString()
     @IsNotEmpty()
@@ -29,10 +37,14 @@ export class CreateExerciseDto{
     @Type(() => Number)
     reps: number;
 
-    @IsNumber()
-    @IsPositive()
-    @Type(() => Number)
-    duration: number;
+    @IsArray()
+    @IsMongoId({each: true})
+    @IsOptional()
+    tag_id: string[];
+
+    @IsString()
+    @IsNotEmpty()
+    level: string;
 }
 
 export class UpdateExerciseDto extends PartialType(CreateExerciseDto) {}
