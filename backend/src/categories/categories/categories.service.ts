@@ -3,7 +3,6 @@ import { CategorySchema, Category } from '../schema/categories.model';
 import { CreateCategoryDto, UpdateCategoryDto } from './dtos/categories.dtos';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { find } from 'rxjs';
 
 @Injectable()
 export class CategoriesService {
@@ -12,17 +11,19 @@ export class CategoriesService {
         private categoriesModel: Model<Category>
     ) {}
 
-
+    // Creación de Categorías
     async createCategories(categoryData: CreateCategoryDto) {
         const newCategory = new this.categoriesModel(categoryData);
         return newCategory.save();
     }
 
+    //Obtener todas las categorías
     async getAllCategories () {
         const getCategories = this.categoriesModel.find().exec();
         return getCategories;
     }
 
+    //Obtener categorías por ID
     async getCategoriesById(id: String) {
         const findCategory = this.categoriesModel.findById(id).exec();
         if(!findCategory){
@@ -31,6 +32,7 @@ export class CategoriesService {
         return findCategory;
     }
 
+    // Editar o actualizar categorías
     async updateCategory(id: String, categoryData: UpdateCategoryDto) {
         const categoryUpdated = this.categoriesModel.findByIdAndUpdate(id, categoryData);
         if(!categoryData){
@@ -39,6 +41,7 @@ export class CategoriesService {
         return categoryUpdated;
     }
 
+    //Eliminar Categoría
     async deleteCategory(id: String) {
         const categoryDeleted = this.categoriesModel.findByIdAndDelete(id);
         if(!categoryDeleted){
