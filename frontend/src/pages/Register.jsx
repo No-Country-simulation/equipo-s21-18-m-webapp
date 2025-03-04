@@ -31,10 +31,10 @@ export default function Register() {
   } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
-    const body = {
+    const body = { 
+      name : data.name,
       email: data.email,
       password: data.password,
-      role: "user",
     };
 
     try {
@@ -180,9 +180,9 @@ export default function Register() {
               },
               pattern: {
                 value:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
+                  /^(?=.*[a-zñ])(?=.*[A-ZÑ])(?=.*\d)(?=.*[$@$!%*?&¿_#¡+])([A-Za-zÑñ\d$@$!%*?&¿_#¡+]|[^ ]){8,15}$/,
                 message:
-                  "Debe contener almenos una mayuscula, minuscula, número, caract. especial '$@$!%*?&'",
+                  "Debe contener almenos una mayuscula, minuscula, número, caract. especial '$@$!%*?&¿_#¡+'",
               },
             })}
           />
