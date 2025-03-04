@@ -1,12 +1,12 @@
 import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
 import { ExercisesService } from './exercises.service';
-import { CreateExerciseDto, UpdateExerciseDto } from '../exercises/dtos/dtos/exercises.dto';
+import { CreateExerciseDto, UpdateExerciseDto } from './dtos/dtos/exercises.dto';
 import { ObjectId } from 'mongoose';
 import { Exercises } from '../schema/exercises.model';
 
 @Controller('exercises')
 export class ExercisesController {
-    constructor(private readonly exerciseService: ExercisesService) {}
+    constructor(private readonly exerciseService: ExercisesService) { }
 
     @Get()
     getAllExercises() {

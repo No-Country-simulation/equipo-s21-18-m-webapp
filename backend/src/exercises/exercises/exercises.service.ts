@@ -10,7 +10,7 @@ export class ExercisesService {
     constructor(
         @InjectModel(Exercises.name)
         private exerciseModel: Model<Exercises>,
-    ) {}
+    ) { }
 
     async findAll(): Promise<Exercises[]> {
         return this.exerciseModel.find().exec();
@@ -18,7 +18,7 @@ export class ExercisesService {
 
     async findById(id: String) {
         const getExercise = this.exerciseModel.findById(id).exec();
-        if(!getExercise) {
+        if (!getExercise) {
             throw new NotFoundException(`No se econtró ejercicio con ID ${id}`)
         }
         return getExercise;
@@ -30,8 +30,8 @@ export class ExercisesService {
     }
 
     async updateExercise(id: string, updateExerciseDto: UpdateExerciseDto) {
-        const updatedExercise = await this.exerciseModel.findByIdAndUpdate(id, updateExerciseDto, {new: true});
-        if(!updatedExercise) {
+        const updatedExercise = await this.exerciseModel.findByIdAndUpdate(id, updateExerciseDto, { new: true });
+        if (!updatedExercise) {
             throw new NotFoundException(`No se halló ejercicio con id ${id}`)
         }
         return updatedExercise;

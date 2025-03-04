@@ -1,6 +1,9 @@
 import { Controller, Post, Patch, Delete, Body, BadRequestException, UseGuards, Get, Req, ForbiddenException, Param } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { JwtAuthGuard } from 'src copy/auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { Types } from 'mongoose';
 
 @Controller('users') // Define el controlador para las rutas bajo el prefijo 'users'
 export class UsersController {
@@ -8,17 +11,23 @@ export class UsersController {
 
     // Endpoint para registrar un nuevo usuario
     @Post('register')
-    async register(@Body() body: { email: string; password: string }) {
-        const { email, password } = body;
+    async register(@Body() createUserDto: CreateUserDto) { // Usa la DTO para validar los datos de entrada
+        const { email, password, username } = createUserDto;
 
         // Verifica si el email ya está en uso
-        const existingUser = await this.usersService.findByEmail(email);
-        if (existingUser) {
+        const existingUserByEmail = await this.usersService.findByEmail(email);
+        if (existingUserByEmail) {
             throw new BadRequestException('Email already in use');
         }
 
-        // Crea un nuevo usuario si el email no está en uso
-        const newUser = await this.usersService.createUser(email, password);
+        // Verifica si el nombre de usuario ya está en uso
+        const existingUserByUsername = await this.usersService.findByUsername(username);
+        if (existingUserByUsername) {
+            throw new BadRequestException('Username already in use');
+        }
+
+        // Crea un nuevo usuario si el email y el nombre de usuario no están en uso
+        const newUser = await this.usersService.createUser(email, password, username);
         return { message: 'User registered successfully', userId: newUser._id };
     }
 
@@ -48,22 +57,28 @@ export class UsersController {
     @UseGuards(JwtAuthGuard)
     async updateUser(
         @Param('id') id: string, // Obtiene el ID del usuario a actualizar desde los parámetros de la URL
-        @Body() body: { password?: string; role?: string }, // Obtiene los campos a actualizar desde el cuerpo de la solicitud
+        @Body() updateUserDto: UpdateUserDto, // Usa la DTO para validar los datos de entrada
         @Req() req
     ) {
-        // Busca el usuario por ID
-        const user = await this.usersService.findById(id);
-        if (!user) {
-            throw new BadRequestException('User not found');
+        // Verifica permisos
+        if (req.user.id !== id && req.user.role !== 'admin') {
+            throw new ForbiddenException('You can only update your own profile');
         }
 
-        // Verifica si se intenta cambiar el rol y si el usuario autenticado es un administrador
-        if (body.role && req.user.role !== 'admin') {
+        // Verifica si se intenta cambiar el rol
+        if (updateUserDto.role && req.user.role !== 'admin') {
             throw new ForbiddenException('Only admins can change roles');
         }
 
         // Actualiza la información del usuario
-        return await this.usersService.updateUser(id, body);
+        const updatedUser = await this.usersService.updateUser(id, updateUserDto);
+
+        // Si no se encuentra el usuario, lanza una excepción
+        if (!updatedUser) {
+            throw new BadRequestException('User not found');
+        }
+
+        return updatedUser;
     }
 
     // Endpoint para eliminar un usuario (solo accesible por administradores)
