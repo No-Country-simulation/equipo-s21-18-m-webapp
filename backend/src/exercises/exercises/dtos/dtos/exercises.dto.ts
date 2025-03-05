@@ -5,7 +5,7 @@ import { PartialType } from '@nestjs/mapped-types';
 export class CreateExerciseDto{
     @IsString()
     @IsNotEmpty()
-    tittle: string;
+    title: string;
 
     @IsString()
     @IsNotEmpty()

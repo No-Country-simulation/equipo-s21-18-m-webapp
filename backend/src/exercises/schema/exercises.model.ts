@@ -5,7 +5,7 @@ import mongoose, { Document, Types } from 'mongoose';
 @Schema()
 export class Exercises extends Document {
     @Prop({required: true})
-    tittle: string;
+    title: string;
 
     @Prop()
     description: string;
