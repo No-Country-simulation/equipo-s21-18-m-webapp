@@ -38,9 +38,9 @@ export const ExerciseDetail = () => {
 
           <div className="grid gap-10 md:grid-cols-2">
             <div>
-              <h1 className="mb-4 text-4xl font-bold">{data.tittle}</h1>
+              <h1 className="mb-4 text-4xl font-bold">{data.title}</h1>
               <p className="text-muted-foreground mb-6">
-                {data.type} | {data.level}
+                {data.type} | {data.category} | {data.level}
               </p>
               <p className="mb-6">{data.description}</p>
               <h2 className="mb-4 text-2xl font-semibold">Instrucciones</h2>

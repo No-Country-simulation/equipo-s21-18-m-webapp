@@ -1,4 +1,4 @@
-import loader from "../../public/loading.svg";
+import loader from "../assets/loading.svg";
 
 export const LoadingView = () => {
   return (

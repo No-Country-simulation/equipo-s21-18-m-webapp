@@ -1,11 +1,21 @@
 import { ExerciseCard } from "../components/ExerciseCard";
 import { LoadingView } from "../components/LoadingView";
 import { useFetch } from "../hooks/useFetch";
+import { useFilteredExercise } from "../hooks/useFilteredExercise";
 
 export const ExerciseLibrary = () => {
-  const { data, hasError, isLoading } = useFetch(
+  const { data, isLoading } = useFetch(
     "https://equipo-s21-18-m-webapp.onrender.com/exercises",
   );
+
+  const {
+    exercises,
+    searchTerm,
+    setSearchTerm,
+    setSelectedCategory,
+    setSelectedLevel,
+  } = useFilteredExercise(data);
+
   return (
     <>
       {isLoading ? (
@@ -18,10 +28,15 @@ export const ExerciseLibrary = () => {
               className="flex h-10 w-full rounded-md border border-gray-200 px-3 py-2 text-sm placeholder:text-gray-500 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:w-1/3"
               type="text"
               placeholder="Search exercises..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
 
-            <select className="rounded-md border border-gray-200 p-2 tracking-wider focus:border focus:border-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none md:w-1/3">
-              <option value="">All Categories</option>
+            <select
+              className="rounded-md border border-gray-200 p-2 tracking-wider focus:border focus:border-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none md:w-1/3"
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              <option value="">Todas las categorías</option>
               <option value="Strength Training">Strength Training</option>
               <option value="Cardio">Cardio</option>
               <option value="Flexibility">Flexibility</option>
@@ -29,16 +44,19 @@ export const ExerciseLibrary = () => {
               <option value="Yoga">Yoga</option>
               <option value="Core">Core</option>
             </select>
-            <select className="rounded-md border border-gray-200 p-2 tracking-wider focus:border focus:border-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none md:w-1/3">
-              <option value="">All Difficulties</option>
-              <option value="Beginner">Beginner</option>
-              <option value="Intermediate">Intermediate</option>
-              <option value="Advanced">Advanced</option>
+            <select
+              className="rounded-md border border-gray-200 p-2 tracking-wider focus:border focus:border-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none md:w-1/3"
+              onChange={(e) => setSelectedLevel(e.target.value)}
+            >
+              <option value="">Todos los niveles</option>
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
             </select>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {data
-              ? data.map((exercise) => (
+              ? exercises.map((exercise) => (
                   <ExerciseCard key={exercise._id} exercise={exercise} />
                 ))
               : "Datos no disponibles"}
