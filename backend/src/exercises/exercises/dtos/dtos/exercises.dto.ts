@@ -45,6 +45,10 @@ export class CreateExerciseDto{
     @IsString()
     @IsNotEmpty()
     level: string;
+
+    @IsString()
+    @IsNotEmpty()
+    category: string;
 }
 
 export class UpdateExerciseDto extends PartialType(CreateExerciseDto) {}

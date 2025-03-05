@@ -33,6 +33,13 @@ export class Exercises extends Document {
 
     @Prop({enum: ['beginner', 'intermediate', 'advanced']})
     level: string;
+
+    @Prop({enum: ['Estiramientos y entrada en calor', 
+        'Yoga', 
+        'Pilates', 
+        'Calistenia', 
+        'Musculación']})
+    category: string;
 }
 
 export const ExercisesSchema = SchemaFactory.createForClass(Exercises);
