@@ -32,9 +32,9 @@ export default function Register() {
 
   const onSubmit = handleSubmit(async (data) => {
     const body = { 
-      name : data.name,
       email: data.email,
       password: data.password,
+      username : data.name,
     };
 
     try {
