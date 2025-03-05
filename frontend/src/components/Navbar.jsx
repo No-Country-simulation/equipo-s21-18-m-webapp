@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
 import Logo from "../logo/Logo";
 import { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Avatar from "./Avatar";
 import DownArrow from "../icons/DownArrow";
 
 export default function Navbar() {
   const [isLoged, setIsLoged] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
+  const navigate = useNavigate();
 
   // Función para cerrar el menú cuando se hace clic fuera de él
   const handleClickOutside = (event) => {
@@ -22,6 +26,32 @@ export default function Navbar() {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  // Verificar si hay un token en el localStorage
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+
+    if (token) {
+      setIsLoged(true);
+    } else {
+      setIsLoged(false); // Si no hay token, el usuario no está logueado
+    }
+  }, [localStorage.getItem("jwt")]);
+
+
+  // Función para cerrar sesión
+  const handleLogout = () => {
+    setLoggingOut(true); // Establece loggingOut a true para mostrar el mensaje de cierre de sesión
+
+    // Simula un pequeño retraso para mostrar el mensaje de cierre de sesión
+    setTimeout(() => {
+      localStorage.removeItem("jwt");
+      setIsLoged(false);
+      setLoggingOut(false);
+      navigate("/login");
+    }, 1000);
+  };
+
 
   return (
     <>
@@ -71,7 +101,9 @@ export default function Navbar() {
                     Configuración
                   </li>
                   <li className="rounded p-2 hover:bg-gray-100">
-                    Cerrar sesión
+                  <button onClick={handleLogout} className="w-full text-left cursor-pointer">
+                      {loggingOut ? "Cerrando sesión..." : "Cerrar sesión"}
+                  </button>
                   </li>
                 </ul>
               </div>
