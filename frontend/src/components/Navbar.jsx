@@ -38,7 +38,6 @@ export default function Navbar() {
     }
   }, [localStorage.getItem("jwt")]);
 
-
   // Función para cerrar sesión
   const handleLogout = () => {
     setLoggingOut(true); // Establece loggingOut a true para mostrar el mensaje de cierre de sesión
@@ -51,7 +50,6 @@ export default function Navbar() {
       navigate("/login");
     }, 1000);
   };
-
 
   return (
     <>
@@ -96,14 +94,20 @@ export default function Navbar() {
             {isOpen && (
               <div className="absolute top-full right-0 mt-2 w-48 rounded-lg bg-white p-2 shadow-lg">
                 <ul className="text-sm text-gray-700">
-                  <li className="rounded p-2 hover:bg-gray-100">Perfil</li>
                   <li className="rounded p-2 hover:bg-gray-100">
-                    Configuración
+                    <Link to="/profile" className="block w-full" onClick={()=> {setIsOpen(false)}}>
+                      <div className="h-full w-full">
+                        Perfil
+                      </div>
+                    </Link>
                   </li>
                   <li className="rounded p-2 hover:bg-gray-100">
-                  <button onClick={handleLogout} className="w-full text-left cursor-pointer">
+                    <button
+                      onClick={handleLogout}
+                      className="w-full cursor-pointer text-left"
+                    >
                       {loggingOut ? "Cerrando sesión..." : "Cerrar sesión"}
-                  </button>
+                    </button>
                   </li>
                 </ul>
               </div>
