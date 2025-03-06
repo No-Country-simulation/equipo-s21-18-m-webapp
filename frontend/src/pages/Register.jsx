@@ -1,9 +1,12 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Spinner from "../components/Spinner";
 
 export default function Register() {
+  const navigate = useNavigate();
+
   {
     /* Funcion de peticion */
   }
@@ -22,7 +25,11 @@ export default function Register() {
     msg: "",
   });
 
+  // Controlar si la peticion aun esta en proceso.
   const [loading, setLoading] = useState(false);
+
+  // Controlar si la peticion fue correcta.
+  const [successMessage, setSuccessMessage] = useState("");
 
   const {
     register,
@@ -34,13 +41,21 @@ export default function Register() {
     const body = {
       email: data.email,
       password: data.password,
-      role: "user",
+      username: data.name,
     };
 
     try {
       setLoading(true);
       const rta = await authRegistro(body);
       console.log(rta);
+      setSuccessMessage("¡Registro exitoso! Redirigiendo...");
+      setTimeout(() => setSuccessMessage(""), 3000);
+
+      // Redirigir después de 3 segundos
+      setTimeout(() => {
+        navigate("/login");
+        setLoading(false);
+      }, 3000);
     } catch (error) {
       setLoading(false);
       handleError(error);
@@ -101,6 +116,7 @@ export default function Register() {
             Nombre
           </label>
           <input
+            disabled={loading}
             className="h10 w-full rounded-md border border-[#e4e4e4] px-3 py-2 text-sm"
             id="name"
             type="text"
@@ -135,6 +151,7 @@ export default function Register() {
             Correo
           </label>
           <input
+            disabled={loading}
             className="h10 w-full rounded-md border border-[#e4e4e4] px-3 py-2 text-sm"
             id="email"
             type="text"
@@ -162,6 +179,7 @@ export default function Register() {
             Contraseña
           </label>
           <input
+            disabled={loading}
             className="h10 w-full rounded-md border border-[#e4e4e4] px-3 py-2 text-sm"
             id="password"
             type="text"
@@ -180,9 +198,9 @@ export default function Register() {
               },
               pattern: {
                 value:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
+                  /^(?=.*[a-zñ])(?=.*[A-ZÑ])(?=.*\d)(?=.*[$@$!%*?&¿_#¡+])([A-Za-zÑñ\d$@$!%*?&¿_#¡+]|[^ ]){8,15}$/,
                 message:
-                  "Debe contener almenos una mayuscula, minuscula, número, caract. especial '$@$!%*?&'",
+                  "Debe contener almenos una mayuscula, minuscula, número, caract. especial '$@$!%*?&¿_#¡+'",
               },
             })}
           />
@@ -192,23 +210,30 @@ export default function Register() {
             </span>
           )}
 
-
           {/* Error Message */}
-          
-          {error.state && <span className="block text-xs text-red-600 mt-2">{error.msg}</span>}
 
-          
-          {/* Spinner de carga */}
-          {loading ? (
-            <Spinner />
-          ) : (
-            <button
-              disabled={loading}
-              className="bg-primary my-4 cursor-pointer rounded-[6px] px-4 py-2 text-sm font-medium text-white"
-            >
-              Crear cuenta
-            </button>
+          {error.state && (
+            <span className="mt-2 block text-xs text-red-600">{error.msg}</span>
           )}
+
+          {/* Mensaje de éxito */}
+          {successMessage && (
+            <span className="mt-2 text-xs text-green-600">
+              {successMessage}
+            </span>
+          )}
+
+          {/* Spinner de carga */}
+          <button
+            disabled={loading || successMessage}
+            className={`bg-primary my-4 flex items-center justify-center gap-2 rounded-[6px] px-4 py-2 text-sm font-medium text-white ${
+              loading || successMessage
+                ? "cursor-not-allowed opacity-50"
+                : "cursor-pointer"
+            }`}
+          >
+            {loading ? <Spinner className="h-5 w-5" /> : "Crear cuenta"}
+          </button>
         </form>
       </div>
     </>
