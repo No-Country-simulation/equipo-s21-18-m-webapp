@@ -6,6 +6,9 @@ import NotFound from './pages/NotFound';
 import Navbar from './components/Navbar';
 import { ExerciseLibrary } from './pages/ExerciseLibrary';
 import { ExerciseDetail } from './pages/ExerciseDetail';
+import { RoutineLibrary } from './pages/RoutineLibrary';
+import { RoutineDetails } from './pages/RoutineDetails';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/exercises' element={<ExerciseLibrary />} />
           <Route path='/exercise-detail/:id' element={<ExerciseDetail />} />
+          <Route path='/routines' element={<RoutineLibrary />} />
+          <Route path='/routine-details/:id' element={<RoutineDetails />} />
+          <Route path='/profile' element={<Profile />}/>
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Router>

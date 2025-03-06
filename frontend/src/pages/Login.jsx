@@ -14,7 +14,7 @@ export default function Login() {
     const RUTA = `https://equipo-s21-18-m-webapp.onrender.com/auth/login`;
     try {
       const { data } = await axios.post(RUTA, dataUser);
-      localStorage.setItem('jwt', data.access_token);
+      localStorage.setItem("jwt", data.access_token);
       return data;
     } catch (error) {
       throw new Error(error.message);
@@ -26,11 +26,13 @@ export default function Login() {
     msg: "",
   });
 
-    // Controlar si la peticion aun esta en proceso.
-    const [loading, setLoading] = useState(false);
+  // Controlar si la peticion aun esta en proceso.
+  const [loading, setLoading] = useState(false);
 
-    // Controlar si la peticion fue correcta.
-    const [successMessage, setSuccessMessage] = useState("");
+  // Controlar si la peticion fue correcta.
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -143,6 +145,7 @@ export default function Login() {
           </label>
           <input
             id="password"
+            type={showPassword ? "text" : "password"}
             disabled={loading}
             className="h10 w-full rounded-md border border-[#e4e4e4] px-3 py-2 text-sm"
             {...register("password", {
@@ -160,9 +163,8 @@ export default function Login() {
               },
               pattern: {
                 value:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
-                message:
-                  "Debe contener almenos una mayuscula, minuscula, número, caract. especial '$@$!%*?&'",
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&¿\-_#"¡\/+;:=<>^´°|¬])([A-Za-z\d$@$!%*?&¿\-_#"¡\/+;:=<>^´°|¬]){8,15}$/,
+                message: `Debe contener almenos una mayuscula, minuscula, número, caract. especial '$@$!%*?&'¿-_#"¡/+;:=<>^´°|¬`,
               },
             })}
           />
@@ -177,7 +179,6 @@ export default function Login() {
           {error.state && (
             <span className="mt-2 block text-xs text-red-600">{error.msg}</span>
           )}
-
 
           {/* Mensaje de éxito */}
           {successMessage && (
@@ -198,6 +199,21 @@ export default function Login() {
           >
             {loading ? <Spinner className="h-5 w-5" /> : "Ingresar"}
           </button>
+
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="show-password"
+              checked={showPassword}
+              onChange={() => setShowPassword(!showPassword)}
+            />
+            <label
+              htmlFor="show-password"
+              className="ml-2 text-sm text-gray-600"
+            >
+              Mostrar contraseña
+            </label>
+          </div>
         </form>
       </section>
     </>
