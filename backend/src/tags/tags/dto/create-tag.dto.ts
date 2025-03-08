@@ -1,3 +1,9 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString, IsNotEmpty } from 'class-validator';
+
 export class CreateTagDto {
-    readonly title: string;
+  @ApiProperty({ example: 'Fitness', description: 'Título del tag' })
+  @IsString()
+  @IsNotEmpty()
+  readonly title: string;
 }

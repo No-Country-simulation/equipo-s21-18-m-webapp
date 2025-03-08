@@ -16,6 +16,9 @@ export class Routine {
 
   @Prop({ type: [{ type: Types.ObjectId, ref: 'Exercise' }], default: [] })
   id_exercises: Types.ObjectId[];
+
+  @Prop({ required: true }) 
+  user_id: string;
 }
 
 export const RoutineSchema = SchemaFactory.createForClass(Routine);
