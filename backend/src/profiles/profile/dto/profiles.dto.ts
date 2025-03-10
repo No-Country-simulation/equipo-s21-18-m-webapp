@@ -25,7 +25,8 @@ export class CreateProfileDto {
   })
   @IsArray()
   @IsMongoId({ each: true })
-  routines_id: string[];
+  @IsOptional()
+  routines_id?: string[];
 
   @ApiProperty({
     example: 25,
@@ -60,10 +61,6 @@ export class CreateProfileDto {
   @IsMongoId()
   @IsOptional()
   goals?: string;
-
-  @ApiProperty({ example: '60d5ec', description: 'ID del usuario' })
-  @IsMongoId()
-  user_id: string;
 
   @ApiProperty({
     example: 'moderadamente_activo',

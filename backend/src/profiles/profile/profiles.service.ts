@@ -10,30 +10,50 @@ export class ProfilesService {
     @InjectModel(Profile.name) private profileModel: Model<Profile>,
   ) {}
 
-  async create(createProfileDto: CreateProfileDto): Promise<Profile> {
-    const newProfile = new this.profileModel(createProfileDto);
+  async create(
+    userId: string,
+    createProfileDto: CreateProfileDto,
+  ): Promise<Profile> {
+    const newProfile = new this.profileModel({
+      ...createProfileDto,
+      user_id: userId,
+    });
     return newProfile.save();
   }
 
   async findAll(): Promise<Profile[]> {
-    return this.profileModel.find().populate('exercises_id goals');
+    return this.profileModel.find().populate('routines_id goals');
   }
 
   async findOne(id: string): Promise<Profile> {
     const profile = await this.profileModel
       .findById(id)
-      .populate('exercises_id goals');
-    if (!profile) throw new NotFoundException('Profile not found');
+      .populate('routines_id goals');
+    if (!profile) throw new NotFoundException('Perfil no encontrado');
+    return profile;
+  }
+
+  async findOneByUserId(userId: string): Promise<Profile> {
+    const profile = await this.profileModel
+      .findOne({ user_id: userId })
+      .populate('routines_id goals');
+    if (!profile)
+      throw new NotFoundException('Perfil no encontrado para este usuario');
     return profile;
   }
 
   async update(
-    id: string,
+    userId: string,
     updateProfileDto: UpdateProfileDto,
   ): Promise<Profile> {
-    return this.profileModel.findByIdAndUpdate(id, updateProfileDto, {
-      new: true,
-    });
+    const profile = await this.profileModel.findOne({ user_id: userId });
+
+    if (!profile) {
+      throw new NotFoundException('Perfil no encontrado');
+    }
+
+    Object.assign(profile, updateProfileDto);
+    return profile.save();
   }
 
   async remove(id: string): Promise<Profile> {

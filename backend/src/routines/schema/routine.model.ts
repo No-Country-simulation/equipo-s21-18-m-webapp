@@ -14,7 +14,7 @@ export class Routine {
   @Prop({ enum: ['fácil', 'intermedio', 'avanzado'], required: true })
   difficult: string;
 
-  @Prop({ type: [{ type: Types.ObjectId, ref: 'Exercise' }], default: [] })
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'Exercises' }], default: [] })
   id_exercises: Types.ObjectId[];
 
   @Prop({ required: true }) 

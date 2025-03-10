@@ -4,11 +4,9 @@ import { Model } from 'mongoose';
 import { Routine, RoutineDocument } from '../schema/routine.model';
 import { CreateRoutineDto, UpdateRoutineDto } from './dto/routines.dto';
 
-
 @Injectable()
 export class RoutinesService {
   constructor(
-   
     @InjectModel(Routine.name) private routineModel: Model<RoutineDocument>,
   ) {}
 
@@ -21,7 +19,6 @@ export class RoutinesService {
     return this.routineModel.find().populate('id_exercises').exec();
   }
 
-  
   async findOne(id: string) {
     const routine = await this.routineModel
       .findById(id)

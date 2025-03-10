@@ -1,7 +1,7 @@
 import { IsString, IsNotEmpty, IsNumber, IsPositive } from 'class-validator';
 import { Type } from 'class-transformer';
 import { PartialType } from '@nestjs/mapped-types';
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateExerciseDto {
   @ApiProperty({ example: 'Sentadilla', description: 'Nombre del ejercicio' })

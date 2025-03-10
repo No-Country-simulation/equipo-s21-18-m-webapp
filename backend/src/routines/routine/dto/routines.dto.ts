@@ -28,9 +28,9 @@ export class CreateRoutineDto {
   @ApiProperty({
     example: 'intermedio',
     description: 'Nivel de dificultad de la rutina',
-    enum: ['fácil', 'intermedio', 'difícil'],
+    enum: ['fácil', 'intermedio', 'avanzado'],
   })
-  @IsEnum(['fácil', 'intermedio', 'difícil'])
+  @IsEnum(['fácil', 'intermedio', 'avanzado'])
   difficult: string;
 
   @ApiProperty({ 
