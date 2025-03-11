@@ -12,21 +12,24 @@ export default function Navbar() {
           </Link>
 
           <ul className="flex gap-4">
-            <li>
-              <Link to={"/exercises"}>Exercises</Link>
+            <li className="hover:text-primary transition duration-700 rounded-full relative group isolate">
+              <Link to={"/exercises"}>Ejercicios</Link>
             </li>
-            <li>
-              <Link to={"/dashboard"}>Dashboard</Link>
+            <li className="hover:text-primary transition duration-700 rounded-full relative group isolate">
+              <Link to={"/routines"}>Rutinas</Link>
             </li>
-            <li>
-              <Link to={"/progress"}>Progress</Link>
+            <li className="hover:text-primary transition duration-700 rounded-full relative group isolate">
+              <Link to={"/dashboard"}>Panel</Link>
+            </li>
+            <li className="hover:text-primary transition duration-700 rounded-full relative group isolate">
+              <Link to={"/progress"}>Progreso</Link>
             </li>
           </ul>
         </div>
 
         <div className="flex gap-4">
-          <Link to={"/login"} className="h-[2.25rem] px-3 content-center">Login</Link>
-          <Link to={"/register"} className="bg-primary text-white h-[2.25rem] px-3 content-center rounded-[6px] ">Sing Up</Link>
+          <Link to={"/login"} className="h-[2.25rem] px-3 content-center hover:text-primary transition duration-700 rounded-full relative group isolate">Iniciar sesión</Link>
+          <Link to={"/register"} className="bg-primary text-white h-[2.25rem] px-3 content-center rounded-[6px] ">Registrarse</Link>
         </div>
       </div>
     </>

@@ -1,5 +1,6 @@
+import { Type } from '@nestjs/common';
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import mongoose, { Document, Types } from 'mongoose';
 
 @Schema()
 export class Exercises extends Document {
@@ -8,6 +9,12 @@ export class Exercises extends Document {
 
     @Prop()
     description: string;
+
+    @Prop()
+    instructions: string;
+
+    @Prop()
+    benefits: string;
 
     @Prop()
     image: string;
@@ -21,9 +28,11 @@ export class Exercises extends Document {
     @Prop()
     reps: number;
 
-    @Prop()
-    duration: number;
+    @Prop({ type: [mongoose.Schema.Types.ObjectId], ref: 'Tag'})
+    tag_id: Types.ObjectId[];
 
+    @Prop({enum: ['beginner', 'intermediate', 'advanced']})
+    level: string;
 }
 
 export const ExercisesSchema = SchemaFactory.createForClass(Exercises);

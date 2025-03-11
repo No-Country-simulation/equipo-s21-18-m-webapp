@@ -14,9 +14,6 @@ export class User {
     @Prop({ type: Types.ObjectId, default: () => new Types.ObjectId() })
     _id: Types.ObjectId;
 
-    @Prop({ required: true})
-    name: string;
-
     @Prop({ required: true, unique: true })
     email: string;
 
@@ -25,9 +22,6 @@ export class User {
 
     @Prop({ required: true, unique: true })
     username: string;
-
-    // @Prop({ required: true, unique: true })
-    // profile_id: string;
 
     @Prop({ enum: UserRole, default: UserRole.USER })
     role: UserRole;
