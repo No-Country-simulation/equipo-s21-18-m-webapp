@@ -1,12 +1,12 @@
+import { useContext } from "react";
 import { ExerciseCard } from "../components/ExerciseCard";
 import { LoadingView } from "../components/LoadingView";
-import { useFetch } from "../hooks/useFetch";
 import { useFilteredExercise } from "../hooks/useFilteredExercise";
+import { ExercisesContext } from "../context/ExercisesContext";
 
 export const ExerciseLibrary = () => {
-  const { data, isLoading } = useFetch(
-    "https://equipo-s21-18-m-webapp.onrender.com/exercises",
-  );
+  const { exerciseList: data, isLoadingExercise: isLoading } =
+    useContext(ExercisesContext);
 
   const {
     exercises,
@@ -37,12 +37,8 @@ export const ExerciseLibrary = () => {
               onChange={(e) => setSelectedCategory(e.target.value)}
             >
               <option value="">Todas las categorías</option>
-              <option value="Strength Training">Strength Training</option>
-              <option value="Cardio">Cardio</option>
-              <option value="Flexibility">Flexibility</option>
-              <option value="HIIT">HIIT</option>
               <option value="Yoga">Yoga</option>
-              <option value="Core">Core</option>
+              <option value="Musculación">Musculación</option>
             </select>
             <select
               className="rounded-md border border-gray-200 p-2 tracking-wider focus:border focus:border-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none md:w-1/3"
