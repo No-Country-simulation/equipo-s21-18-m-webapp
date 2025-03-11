@@ -10,24 +10,27 @@ import { RoutineLibrary } from "./pages/RoutineLibrary";
 import { RoutineDetails } from "./pages/RoutineDetails";
 import Profile from "./pages/Profile";
 import { ExercisesProvider } from "./context/ExercisesProvider";
+import { ToastProvider } from "./context/ToastProvider";
 
 function App() {
   return (
     <ExercisesProvider>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/exercises" element={<ExerciseLibrary />} />
-          <Route path="/exercise-detail/:id" element={<ExerciseDetail />} />
-          <Route path="/routines" element={<RoutineLibrary />} />
-          <Route path="/routine-details/:id" element={<RoutineDetails />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
+      <ToastProvider>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/exercises" element={<ExerciseLibrary />} />
+            <Route path="/exercise-detail/:id" element={<ExerciseDetail />} />
+            <Route path="/routines" element={<RoutineLibrary />} />
+            <Route path="/routine-details/:id" element={<RoutineDetails />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Router>
+      </ToastProvider>
     </ExercisesProvider>
   );
 }
