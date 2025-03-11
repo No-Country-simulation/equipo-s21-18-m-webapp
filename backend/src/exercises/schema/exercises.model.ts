@@ -5,7 +5,7 @@ import mongoose, { Document, Types } from 'mongoose';
 @Schema()
 export class Exercises extends Document {
     @Prop({required: true})
-    tittle: string;
+    title: string;
 
     @Prop()
     description: string;
@@ -31,8 +31,15 @@ export class Exercises extends Document {
     @Prop({ type: [mongoose.Schema.Types.ObjectId], ref: 'Tag'})
     tag_id: Types.ObjectId[];
 
-    @Prop({enum: ['beginner', 'intermediate', 'advanced']})
+    @Prop({enum: ['Beginner', 'Intermediate', 'Advanced']})
     level: string;
+
+    @Prop({enum: ['Estiramientos y entrada en calor', 
+        'Yoga', 
+        'Pilates', 
+        'Calistenia', 
+        'Musculación']})
+    category: string;
 }
 
 export const ExercisesSchema = SchemaFactory.createForClass(Exercises);

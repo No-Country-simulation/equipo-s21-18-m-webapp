@@ -1,9 +1,12 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Spinner from "../components/Spinner";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   {
     /* Funcion de peticion */
   }
@@ -11,6 +14,7 @@ export default function Login() {
     const RUTA = `https://equipo-s21-18-m-webapp.onrender.com/auth/login`;
     try {
       const { data } = await axios.post(RUTA, dataUser);
+      localStorage.setItem("jwt", data.access_token);
       return data;
     } catch (error) {
       throw new Error(error.message);
@@ -22,7 +26,13 @@ export default function Login() {
     msg: "",
   });
 
+  // Controlar si la peticion aun esta en proceso.
   const [loading, setLoading] = useState(false);
+
+  // Controlar si la peticion fue correcta.
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -40,6 +50,15 @@ export default function Login() {
       setLoading(true);
       const rta = await authLogin(body);
       console.log(rta);
+
+      setSuccessMessage("¡Registro exitoso! Redirigiendo...");
+      setTimeout(() => setSuccessMessage(""), 3000);
+
+      // Redirigir después de 3 segundos
+      setTimeout(() => {
+        navigate("/");
+        setLoading(false);
+      }, 3000);
     } catch (error) {
       setLoading(false);
       handleError(error);
@@ -99,6 +118,7 @@ export default function Login() {
           </label>
           <input
             type="text"
+            disabled={loading}
             id="email"
             className="h10 w-full rounded-md border border-[#e4e4e4] px-3 py-2 text-sm"
             placeholder="m@ejemplo.com"
@@ -125,6 +145,8 @@ export default function Login() {
           </label>
           <input
             id="password"
+            type={showPassword ? "text" : "password"}
+            disabled={loading}
             className="h10 w-full rounded-md border border-[#e4e4e4] px-3 py-2 text-sm"
             {...register("password", {
               required: {
@@ -141,9 +163,8 @@ export default function Login() {
               },
               pattern: {
                 value:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
-                message:
-                  "Debe contener almenos una mayuscula, minuscula, número, caract. especial '$@$!%*?&'",
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&¿\-_#"¡\/+;:=<>^´°|¬])([A-Za-z\d$@$!%*?&¿\-_#"¡\/+;:=<>^´°|¬]){8,15}$/,
+                message: `Debe contener almenos una mayuscula, minuscula, número, caract. especial '$@$!%*?&'¿-_#"¡/+;:=<>^´°|¬`,
               },
             })}
           />
@@ -153,24 +174,46 @@ export default function Login() {
             </span>
           )}
 
-
           {/* Error Message */}
-          
-          {error.state && <span className="block text-xs text-red-600 mt-2">{error.msg}</span>}
 
-          
+          {error.state && (
+            <span className="mt-2 block text-xs text-red-600">{error.msg}</span>
+          )}
+
+          {/* Mensaje de éxito */}
+          {successMessage && (
+            <span className="mt-2 text-xs text-green-600">
+              {successMessage}
+            </span>
+          )}
+
           {/* Spinner de carga */}
 
-          {loading ? (
-            <Spinner />
-          ) : (
-            <button
-              disabled={loading}
-              className="bg-primary my-4 cursor-pointer rounded-[6px] px-4 py-2 text-sm font-medium text-white"
+          <button
+            disabled={loading || successMessage}
+            className={`bg-primary my-4 flex items-center justify-center gap-2 rounded-[6px] px-4 py-2 text-sm font-medium text-white ${
+              loading || successMessage
+                ? "cursor-not-allowed opacity-50"
+                : "cursor-pointer"
+            }`}
+          >
+            {loading ? <Spinner className="h-5 w-5" /> : "Ingresar"}
+          </button>
+
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="show-password"
+              checked={showPassword}
+              onChange={() => setShowPassword(!showPassword)}
+            />
+            <label
+              htmlFor="show-password"
+              className="ml-2 text-sm text-gray-600"
             >
-              Ingresar
-            </button>
-          )}
+              Mostrar contraseña
+            </label>
+          </div>
         </form>
       </section>
     </>
