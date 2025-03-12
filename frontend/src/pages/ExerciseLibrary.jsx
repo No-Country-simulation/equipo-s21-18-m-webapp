@@ -39,6 +39,11 @@ export const ExerciseLibrary = () => {
               <option value="">Todas las categorías</option>
               <option value="Yoga">Yoga</option>
               <option value="Musculación">Musculación</option>
+              <option value="Pilates">Pilates</option>
+              <option value="Calistenia">Calistenia</option>
+              <option value="Entrada en calor y estiramientos">
+                Entrada en calor y estiramientos
+              </option>
             </select>
             <select
               className="rounded-md border border-gray-200 p-2 tracking-wider focus:border focus:border-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none md:w-1/3"
