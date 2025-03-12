@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { RoutinesContext } from "./RoutinesContext";
 
-export const useFetch = (url) => {
+export const RoutinesProvider = ({ children }) => {
   const [state, setState] = useState({
     data: null,
     isLoading: true,
@@ -10,7 +11,7 @@ export const useFetch = (url) => {
 
   useEffect(() => {
     getFetch();
-  }, [url]);
+  }, []);
 
   const setLoadingState = () => {
     setState({
@@ -24,7 +25,9 @@ export const useFetch = (url) => {
   const getFetch = async () => {
     setLoadingState();
 
-    const resp = await fetch(url);
+    const resp = await fetch(
+      "https://equipo-s21-18-m-webapp.onrender.com/routines/",
+    );
 
     if (!resp.ok) {
       setState({
@@ -48,9 +51,11 @@ export const useFetch = (url) => {
     });
   };
 
-  return {
-    data: state.data,
-    isLoading: state.isLoading,
-    hasError: state.hasError,
-  };
+  return (
+    <RoutinesContext.Provider
+      value={{ data: state.data, isLoading: state.isLoading, getFetch }}
+    >
+      {children}
+    </RoutinesContext.Provider>
+  );
 };
