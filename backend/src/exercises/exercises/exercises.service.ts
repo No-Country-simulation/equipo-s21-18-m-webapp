@@ -24,7 +24,7 @@ export class ExercisesService {
         return getExercise;
     }
 
-    async createExercise(createExerciseDto: CreateExerciseDto): Promise<Exercises> {
+    async createExercise(createExerciseDto: CreateExerciseDto & {image: string}): Promise<Exercises> {
         const newExercise = new this.exerciseModel(createExerciseDto);
         return newExercise.save();
     }

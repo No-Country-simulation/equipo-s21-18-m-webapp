@@ -4,7 +4,6 @@ import { Model } from 'mongoose';
 import { Routine, RoutineDocument } from '../schema/routine.model';
 import { CreateRoutineDto, UpdateRoutineDto } from './dto/routines.dto';
 
-
 @Injectable()
 export class RoutinesService {
   constructor(
@@ -27,6 +26,10 @@ export class RoutinesService {
       .exec();
     if (!routine) throw new NotFoundException('Routine not found');
     return routine;
+  }
+
+  async getUserRoutines(userId: string): Promise<Routine[]> {
+    return this.routineModel.find({ userId }).exec();
   }
 
   async update(id: string, updateData: UpdateRoutineDto) {

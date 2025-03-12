@@ -1,3 +1,12 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString, IsOptional } from 'class-validator';
+
 export class UpdateTagDto {
-    readonly title?: string;
+  @ApiProperty({
+    example: 'Nutrición',
+    description: 'Título del tag (opcional)',
+  })
+  @IsString()
+  @IsOptional()
+  readonly title?: string;
 }

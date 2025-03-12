@@ -3,6 +3,7 @@ import { ExercisesService } from './exercises.service';
 import { ExercisesController } from './exercises.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Exercises, ExercisesSchema } from '../schema/exercises.model';
+import { CloudinaryService } from './cloudinary.service';
 
 @Module({
   imports: [
@@ -10,7 +11,7 @@ import { Exercises, ExercisesSchema } from '../schema/exercises.model';
       {name: Exercises.name, schema: ExercisesSchema}
     ]),
   ],
-  providers: [ExercisesService],
+  providers: [ExercisesService, CloudinaryService],
   controllers: [ExercisesController]
 })
 export class ExercisesModule {}

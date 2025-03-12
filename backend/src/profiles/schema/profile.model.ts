@@ -1,31 +1,29 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Types } from 'mongoose';
+import mongoose from 'mongoose';
 
 @Schema()
 export class Profile extends Document {
   @Prop({ required: true })
   fullname: string;
 
-  @Prop({ type: [{ type: Types.ObjectId, ref: 'Routine' }], default: [] })
-  routines_id: Types.ObjectId[];
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Routine' }] })
+  routines_id: mongoose.Types.ObjectId[];
 
-  @Prop({ required: true, min: 16, max: 100 })
+  @Prop({ required: true })
   age: number;
 
-  @Prop({ required: true, min: 1 })
+  @Prop({ required: true })
   weight: number;
 
-  @Prop({ required: true, min: 1 })
+  @Prop({ required: true })
   height: number;
 
-  @Prop({ type: Types.ObjectId, ref: 'Goal' })
-  goals: Types.ObjectId;
-
-  @Prop({ type: Types.ObjectId, ref: 'User', required: true })
-  user_id: Types.ObjectId;
+  @Prop({ enum: ['Definición', 'Volumen'] })
+  goals: string;
 
   @Prop({
+    required: true,
     enum: [
       'sedentario',
       'ligeramente_activo',
@@ -33,9 +31,11 @@ export class Profile extends Document {
       'muy_activo',
       'extremadamente_activo',
     ],
-    required: true,
   })
   level: string;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
+  user_id: mongoose.Types.ObjectId;
 }
 
 export const ProfileSchema = SchemaFactory.createForClass(Profile);
