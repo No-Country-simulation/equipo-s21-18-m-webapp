@@ -1,49 +1,29 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import noImg from "../assets/no-image.svg";
 import { useFetch } from "../hooks/useFetch";
 import { LoadingView } from "../components/LoadingView";
-
-import { useToast } from "../context/ToastContext";
+import { RoutineModal } from "../components/RoutineModal";
 
 export const ExerciseDetail = () => {
   const { id } = useParams();
+  const [isOpen, setIsOpen] = useState(false);
 
   const { data, isLoading } = useFetch(
     `https://equipo-s21-18-m-webapp.onrender.com/exercises/${id}`,
   );
 
-  const { openToast } = useToast();
-
   const handleAdd = () => {
-    openToast(
-      <div className="flex gap-2 rounded-lg bg-green-300 p-4 text-green-800 shadow-lg">
-        <div className="grid h-12 w-12 place-items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-12 w-12"
-          >
-            <path d="M18.71,7.21a1,1,0,0,0-1.42,0L9.84,14.67,6.71,11.53A1,1,0,1,0,5.29,13l3.84,3.84a1,1,0,0,0,1.42,0l8.16-8.16A1,1,0,0,0,18.71,7.21Z" />
-          </svg>
-        </div>
-        <div className="grid place-items-center">
-          <h3 className="font-bold">Éxito</h3>
-          <p className="text-sm">Rutina actualizada</p>
-        </div>
-      </div>,
-      9000,
-    );
+    setIsOpen(true);
+  };
+
+  const onClose = () => {
+    setIsOpen(false);
   };
 
   return (
     <>
+      <RoutineModal open={isOpen} onClose={onClose} id={id} />
       {isLoading ? (
         <LoadingView />
       ) : (

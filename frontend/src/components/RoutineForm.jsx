@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useToast } from "../context/ToastContext";
-export const RoutineForm = ({ id, selection, onClose }) => {
+export const RoutineForm = ({ id, selection, onReset }) => {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -93,7 +93,7 @@ export const RoutineForm = ({ id, selection, onClose }) => {
               strokeLinejoin="round"
               className="h-12 w-12"
             >
-              <path d="M18.71,7.21a1,1,0,0,0-1.42,0L9.84,14.67,6.71,11.53A1,1,0,1,0,5.29,13l3.84,3.84a1,1,0,0,0,1.42,0l8.16-8.16A1,1,0,0,0,18.71,7.21Z" />
+              <path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z" />
             </svg>
           </div>
           <div className="grid place-items-center">
@@ -110,7 +110,7 @@ export const RoutineForm = ({ id, selection, onClose }) => {
         difficult: "",
         id_exercises: [],
       });
-      onClose();
+      onReset();
     }
   };
 

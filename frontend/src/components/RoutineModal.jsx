@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import ReactDom from "react-dom";
-import { ExercisesContext } from "../context/ExercisesContext";
+
 import { MODAL_STYLES, OVERLAY_STYLES } from "../utils/styles";
 import { RoutineForm } from "./RoutineForm";
 import { useToast } from "../context/ToastContext";
+import { RoutinesContext } from "../context/RoutinesContext";
 
 export const RoutineModal = ({ open, id, onClose }) => {
-  const { routineList } = useContext(ExercisesContext);
+  const { data: routineList, getFetch } = useContext(RoutinesContext);
   const [showForm, setShowForm] = useState(false);
   const [selection, setSelection] = useState("");
 
@@ -24,7 +25,33 @@ export const RoutineModal = ({ open, id, onClose }) => {
   }, [selection]);
 
   const handleUpdate = async () => {
-    if (updatedRoutine.id_exercises.includes(id)) return;
+    if (updatedRoutine.id_exercises.includes(id)) {
+      openToast(
+        <div className="flex gap-2 rounded-lg bg-sky-300 p-4 text-sky-800 shadow-lg">
+          <div className="grid h-12 w-12 place-items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-12 w-12"
+            >
+              <path d="M12,10a1,1,0,0,0-1,1v6a1,1,0,0,0,2,0V11A1,1,0,0,0,12,10Zm0-4a1.25,1.25,0,1,0,1.25,1.25A1.25,1.25,0,0,0,12,6Z" />
+            </svg>
+          </div>
+          <div className="grid place-items-center">
+            <h3 className="font-bold">Oops!</h3>
+            <p className="text-sm">El ejercicio ya ha sido registrado</p>
+          </div>
+        </div>,
+        2000,
+      );
+      return;
+    }
 
     setUpdatedRoutine((prevData) => ({
       ...prevData,
@@ -96,7 +123,7 @@ export const RoutineModal = ({ open, id, onClose }) => {
               strokeLinejoin="round"
               className="h-12 w-12"
             >
-              <path d="M18.71,7.21a1,1,0,0,0-1.42,0L9.84,14.67,6.71,11.53A1,1,0,1,0,5.29,13l3.84,3.84a1,1,0,0,0,1.42,0l8.16-8.16A1,1,0,0,0,18.71,7.21Z" />
+              <path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z" />
             </svg>
           </div>
           <div className="grid place-items-center">
@@ -107,7 +134,7 @@ export const RoutineModal = ({ open, id, onClose }) => {
         2000,
       );
     } finally {
-      onClose();
+      onReset();
     }
   };
 
@@ -121,10 +148,15 @@ export const RoutineModal = ({ open, id, onClose }) => {
   };
 
   const handleCloseBtn = () => {
-    setShowForm(false);
-    onClose();
+    onReset();
+  };
+
+  const onReset = () => {
     setSelection("");
+    setShowForm(false);
     setUpdatedRoutine(null);
+    getFetch();
+    onClose();
   };
 
   if (!open) return null;
@@ -182,7 +214,7 @@ export const RoutineModal = ({ open, id, onClose }) => {
             id={id}
             selection={selection}
             open={open}
-            onClose={onClose}
+            onReset={onReset}
           />
         )}
 
