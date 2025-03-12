@@ -1,21 +1,22 @@
 import SiderMenu from "../components/SiderMenu";
-import { Link, Routes, Route, Navigate  } from 'react-router-dom';
-import RoutinesPrueba from '../components/RoutinesPrueba';
-import ProgressPrueba from '../components/ProgressPrueba';
-import PanelPrueba from '../components/PanelPrueba';
+import { Routes, Route, Navigate } from "react-router-dom";
+
+import { UserRoutines } from "./UserRoutines";
+import { UserProgress } from "./UserProgress";
+import { UserDashboard } from "./UserDashboard";
 
 export default function Dashboard() {
   return (
     <>
       <div className="flex">
         <SiderMenu />
-        <section>
-        <Routes>
-          <Route path="/" element={<Navigate to="/dashboard/panel" />} />
-          <Route path="panel" element={<PanelPrueba />} />
-          <Route path="routines" element={<RoutinesPrueba />} />
-          <Route path="progress" element={<ProgressPrueba />} />
-        </Routes>
+        <section className="flex-1 p-8">
+          <Routes>
+            <Route path="/" element={<Navigate to="/dashboard/panel" />} />
+            <Route path="panel" element={<UserDashboard />} />
+            <Route path="routines" element={<UserRoutines />} />
+            <Route path="progress" element={<UserProgress />} />
+          </Routes>
         </section>
       </div>
     </>
