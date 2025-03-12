@@ -10,10 +10,7 @@ export const ExerciseCard = ({ exercise = null }) => {
   const onRoutinesBtn = (event) => {
     event.stopPropagation(); // Evita la navegación
     event.preventDefault(); // Evita el comportamiento predeterminado del Link
-    console.log("routines");
-    console.log(isOpen);
     setIsOpen(true);
-    console.log(isOpen);
   };
 
   const onClose = () => {

@@ -1,17 +1,29 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import noImg from "../assets/no-image.svg";
 import { useFetch } from "../hooks/useFetch";
 import { LoadingView } from "../components/LoadingView";
+import { RoutineModal } from "../components/RoutineModal";
 
 export const ExerciseDetail = () => {
   const { id } = useParams();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const { data, hasError, isLoading } = useFetch(
+  const { data, isLoading } = useFetch(
     `https://equipo-s21-18-m-webapp.onrender.com/exercises/${id}`,
   );
 
+  const handleAdd = () => {
+    setIsOpen(true);
+  };
+
+  const onClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
+      <RoutineModal open={isOpen} onClose={onClose} id={id} />
       {isLoading ? (
         <LoadingView />
       ) : (
@@ -57,7 +69,10 @@ export const ExerciseDetail = () => {
                   <li key={benefit}>{benefit}</li>
                 ))}
               </ul>
-              <button className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-[#b50d50] px-4 py-2 text-sm font-medium whitespace-nowrap text-white transition-colors hover:bg-[#e51065]">
+              <button
+                className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-[#b50d50] px-4 py-2 text-sm font-medium whitespace-nowrap text-white transition-colors hover:bg-[#e51065]"
+                onClick={handleAdd}
+              >
                 Añadir a la rutina
               </button>
             </div>
