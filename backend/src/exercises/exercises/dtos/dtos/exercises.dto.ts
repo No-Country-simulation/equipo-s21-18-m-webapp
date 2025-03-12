@@ -15,7 +15,7 @@ export class CreateExerciseDto {
   @ApiProperty({ example: 'Sentadilla', description: 'Nombre del ejercicio' })
   @IsString()
   @IsNotEmpty()
-  tittle: string;
+  title: string;
 
   @ApiProperty({
     example: 'Ejercicio para fortalecer las piernas',
@@ -28,10 +28,11 @@ export class CreateExerciseDto {
   @ApiProperty({
     example: 'https://imagen-ejemplo.com/sentadilla.jpg',
     description: 'URL de la imagen del ejercicio',
+    type: 'string',
+    format: 'binary'
   })
-  @IsString()
   @IsNotEmpty()
-  image: string;
+  image: any;
 
   @ApiProperty({
     example: 'Coloca los pies al ancho de los hombros y baja lentamente.',

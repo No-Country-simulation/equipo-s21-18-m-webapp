@@ -6,6 +6,8 @@ import {
   Delete,
   Param,
   Body,
+  UploadedFile,
+  UseInterceptors
 } from '@nestjs/common';
 import { ExercisesService } from './exercises.service';
 import {
@@ -21,11 +23,16 @@ import {
   ApiParam,
   ApiBody,
 } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { CloudinaryService } from './cloudinary.service';
 
 @ApiTags('Ejercicios (Solo Usuarios admin)')
 @Controller('exercises')
 export class ExercisesController {
-  constructor(private readonly exerciseService: ExercisesService) {}
+  constructor(
+    private readonly exerciseService: ExercisesService,
+    private readonly cloudinaryService: CloudinaryService
+  ) {}
 
   @Get()
   @ApiOperation({
@@ -68,8 +75,15 @@ export class ExercisesController {
   })
   @ApiBody({ type: CreateExerciseDto })
   @ApiResponse({ status: 201, description: 'Ejercicio creado correctamente.' })
-  createExercise(@Body() createData: CreateExerciseDto) {
-    return this.exerciseService.createExercise(createData);
+  @UseInterceptors(FileInterceptor('image'))
+  async createExercise(
+    @UploadedFile() image: Express.Multer.File ,
+    @Body() createData: CreateExerciseDto) {
+    const uploadResult = await this.cloudinaryService.uploadImage(image);
+    return this.exerciseService.createExercise({
+      ...createData,
+      image: uploadResult.secure_url,
+    });
   }
 
   @Put('/:id')

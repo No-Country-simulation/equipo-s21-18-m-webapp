@@ -5,12 +5,14 @@ import { AuthModule } from './auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/user/users.module';
 import { JwtModule } from '@nestjs/jwt';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ExercisesModule } from './exercises/exercises/exercises.module';
 import { ProfilesModule } from './profiles/profile/profiles.module';
 import { TagsModule } from './tags/tags/tags.module';
 import { CategoriesModule } from './categories/categories/categories.module';
 import { RoutinesModule } from './routines/routine/routines.module';
+import { CloudinaryModule } from 'nestjs-cloudinary';
+
 
 @Module({
   imports: [
@@ -27,6 +29,15 @@ import { RoutinesModule } from './routines/routine/routines.module';
     TagsModule,
     CategoriesModule,
     RoutinesModule,
+    CloudinaryModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (config: ConfigService) => ({
+        cloud_name: config.get('CLOUDINARY_NAME'),
+        api_key: config.get('CLOUDINARY_KEY'),
+        api_secret: config.get('CLOUDINARY_API_SECRET')
+      }),
+      inject: [ConfigService],
+    })
   ],
   controllers: [AppController],
   providers: [AppService],

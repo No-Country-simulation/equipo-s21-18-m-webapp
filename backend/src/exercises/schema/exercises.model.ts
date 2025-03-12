@@ -16,7 +16,7 @@ export class Exercises extends Document {
     @Prop()
     benefits: string;
 
-    @Prop()
+    @Prop({ default: 'https://via.placeholder.com/150' })
     image: string;
 
     @Prop({enum: ['Para el hogar', 'Para el gimnasio']})
