@@ -81,6 +81,15 @@ export class CreateProfileDto {
     'extremadamente_activo',
   ])
   level: string;
+  @ApiProperty(
+    {
+      example: '67c53ea92683be932e2ced3b',
+      description: 'ID de usuario'
+    }
+  )
+  @IsMongoId()
+  user_id: string;
+
 }
 
 export class UpdateProfileDto extends PartialType(CreateProfileDto) {}

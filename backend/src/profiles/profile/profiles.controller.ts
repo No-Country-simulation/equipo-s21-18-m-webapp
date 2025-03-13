@@ -28,7 +28,7 @@ export class ProfilesController {
   constructor(private readonly profilesService: ProfilesService) {}
 
   @Post()
-  //@UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Crear perfil para el usuario autenticado' })
   @ApiBody({ type: CreateProfileDto })
   @ApiResponse({ status: 201, description: 'Perfil creado exitosamente' })
@@ -48,7 +48,7 @@ export class ProfilesController {
   //}
 
   @Get('me')
-  //@UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Obtener el perfil del usuario autenticado' })
   @ApiResponse({ status: 200, description: 'Perfil obtenido exitosamente' })
   findMyProfile(@Request() req) {
@@ -64,7 +64,7 @@ export class ProfilesController {
   //}
 
   @Put()
-  //@UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Actualizar perfil del usuario autenticado' })
   @ApiBody({ type: UpdateProfileDto })
   @ApiResponse({ status: 200, description: 'Perfil actualizado exitosamente' })
@@ -74,7 +74,7 @@ export class ProfilesController {
   }
 
   @Delete(':id')
-  //@UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Eliminar un perfil' })
   @ApiParam({ name: 'id', type: String, description: 'ID del perfil' })
   @ApiResponse({ status: 200, description: 'Perfil eliminado exitosamente' })
