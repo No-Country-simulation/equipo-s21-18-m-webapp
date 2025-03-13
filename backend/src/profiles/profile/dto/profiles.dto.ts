@@ -19,14 +19,14 @@ export class CreateProfileDto {
   @IsString()
   fullname: string;
 
-  @ApiProperty({
+  /*@ApiProperty({
     example: ['60d5ec'],
     description: 'Lista de IDs de rutinas asociadas',
   })
   @IsArray()
   @IsMongoId({ each: true })
   @IsOptional()
-  routines_id?: string[];
+  routines_id?: string[];*/
 
   @ApiProperty({
     example: 25,
