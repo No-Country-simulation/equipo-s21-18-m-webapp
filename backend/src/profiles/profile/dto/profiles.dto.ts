@@ -54,11 +54,11 @@ export class CreateProfileDto {
   height: number;
 
   @ApiProperty({
-    example: '60d5ec',
-    description: 'ID del objetivo del usuario',
+    example: 'Volumen',
+    description: 'Objetivo del usuario',
     required: false,
   })
-  @IsMongoId()
+  @IsString()
   @IsOptional()
   goals?: string;
 
