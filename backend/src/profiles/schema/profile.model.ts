@@ -7,8 +7,8 @@ export class Profile extends Document {
   @Prop({ required: true })
   fullname: string;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Routine' }] })
-  routines_id: mongoose.Types.ObjectId[];
+  //@Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Routine' }] })
+  //routines_id: mongoose.Types.ObjectId[];
 
   @Prop({ required: true })
   age: number;

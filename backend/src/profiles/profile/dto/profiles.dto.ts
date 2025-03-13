@@ -19,14 +19,14 @@ export class CreateProfileDto {
   @IsString()
   fullname: string;
 
-  @ApiProperty({
+  /*@ApiProperty({
     example: ['60d5ec'],
     description: 'Lista de IDs de rutinas asociadas',
   })
   @IsArray()
   @IsMongoId({ each: true })
   @IsOptional()
-  routines_id?: string[];
+  routines_id?: string[];*/
 
   @ApiProperty({
     example: 25,
@@ -54,11 +54,11 @@ export class CreateProfileDto {
   height: number;
 
   @ApiProperty({
-    example: '60d5ec',
-    description: 'ID del objetivo del usuario',
+    example: 'Volumen',
+    description: 'Objetivo del usuario',
     required: false,
   })
-  @IsMongoId()
+  @IsString()
   @IsOptional()
   goals?: string;
 
@@ -81,6 +81,15 @@ export class CreateProfileDto {
     'extremadamente_activo',
   ])
   level: string;
+  @ApiProperty(
+    {
+      example: '67c53ea92683be932e2ced3b',
+      description: 'ID de usuario'
+    }
+  )
+  @IsMongoId()
+  user_id: string;
+
 }
 
 export class UpdateProfileDto extends PartialType(CreateProfileDto) {}
