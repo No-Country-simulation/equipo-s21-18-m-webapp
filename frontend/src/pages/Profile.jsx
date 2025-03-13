@@ -11,16 +11,79 @@ export default function Profile() {
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
 
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm();
+
+
+  const [error, setError] = useState({
+    state: false,
+    msg: "",
+  });
+
+  // Controlar si la peticion aun esta en proceso.
+  const [loading, setLoading] = useState(false);
+
+  // Controlar si la peticion fue correcta.
+  const [successMessage, setSuccessMessage] = useState("");
+
+
+
   useEffect(() => {
     const decoded = decodeToken(); // Llamamos a la función para obtener los datos decodificados
 
     if (decoded) {
       setUser(decoded); // Si los datos fueron decodificados correctamente, los guardamos en el estado
       console.log(decoded);
+
+       // Solicitar los datos del perfil cuando el usuario esté autenticado
+      fetchProfile(decoded.id);
+
     } else {
       navigate("/login");
     }
   }, [navigate]);
+
+
+
+  const fetchProfile = async (userId) => {
+    const token = localStorage.getItem("jwt");
+
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    const RUTA = `https://equipo-s21-18-m-webapp.onrender.com/profiles/${userId}`;
+
+    try {
+      const response = await axios.get(RUTA, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setProfile(response.data); // Guardamos los datos del perfil en el estado
+
+      // Usamos setValue para llenar el formulario con los datos obtenidos
+      setValue("name", response.data.fullname);
+      setValue("age", response.data.age);
+      setValue("weight", response.data.weight);
+      setValue("height", response.data.height);
+      setValue("nivelActividad", response.data.level);
+      setValue("objetive", response.data.goals);
+
+    } catch (error) {
+      console.error("Error al obtener el perfil:", error);
+      setError({ state: true, msg: "Error al cargar el perfil. Intenta nuevamente." });
+    }
+  };
+
+
 
   {
     /* Funcion de peticion */
@@ -50,23 +113,6 @@ export default function Profile() {
       throw new Error(error.message);
     }
   };
-
-  const [error, setError] = useState({
-    state: false,
-    msg: "",
-  });
-
-  // Controlar si la peticion aun esta en proceso.
-  const [loading, setLoading] = useState(false);
-
-  // Controlar si la peticion fue correcta.
-  const [successMessage, setSuccessMessage] = useState("");
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
     if (!user) {
