@@ -1,4 +1,4 @@
-import { Test, TestingModule } from '@nestjs/testing';
+/* import { Test, TestingModule } from '@nestjs/testing';
 import { ProfilesService } from './profiles.service';
 
 describe('ProfilesService', () => {
@@ -15,4 +15,4 @@ describe('ProfilesService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
-});
+}); */

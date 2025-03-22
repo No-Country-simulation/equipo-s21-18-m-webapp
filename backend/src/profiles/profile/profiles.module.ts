@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+/* import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Profile, ProfileSchema } from '../schema/profile.model';
 import { ProfilesService } from './profiles.service';
@@ -13,4 +13,4 @@ import { AuthModule } from '../../auth/auth.module';
   controllers: [ProfilesController],
   providers: [ProfilesService],
 })
-export class ProfilesModule {}
+export class ProfilesModule {} */

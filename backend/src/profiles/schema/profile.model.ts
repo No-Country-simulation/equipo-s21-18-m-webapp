@@ -1,16 +1,16 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+/* import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+/* import { Document } from 'mongoose';
 import mongoose from 'mongoose';
 
 @Schema()
 export class Profile extends Document {
   @Prop({ required: true })
-  fullname: string;
+  fullname: string; */ 
 
-  //@Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Routine' }] })
-  //routines_id: mongoose.Types.ObjectId[];
+//@Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Routine' }] })
+//routines_id: mongoose.Types.ObjectId[];
 
-  @Prop({ required: true })
+/* @Prop({ required: true })
   age: number;
 
   @Prop({ required: true })
@@ -38,4 +38,4 @@ export class Profile extends Document {
   user_id: mongoose.Types.ObjectId;
 }
 
-export const ProfileSchema = SchemaFactory.createForClass(Profile);
+export const ProfileSchema = SchemaFactory.createForClass(Profile); */

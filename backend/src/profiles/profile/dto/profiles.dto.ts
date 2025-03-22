@@ -1,4 +1,4 @@
-import {
+/* import {
   IsString,
   IsNumber,
   Min,
@@ -17,7 +17,7 @@ export class CreateProfileDto {
     description: 'Nombre completo del usuario',
   })
   @IsString()
-  fullname: string;
+  fullname: string; */
 
   /*@ApiProperty({
     example: ['60d5ec'],
@@ -28,7 +28,7 @@ export class CreateProfileDto {
   @IsOptional()
   routines_id?: string[];*/
 
-  @ApiProperty({
+/*   @ApiProperty({
     example: 25,
     description: 'Edad del usuario',
     minimum: 16,
@@ -92,4 +92,4 @@ export class CreateProfileDto {
 
 }
 
-export class UpdateProfileDto extends PartialType(CreateProfileDto) {}
+export class UpdateProfileDto extends PartialType(CreateProfileDto) {} */

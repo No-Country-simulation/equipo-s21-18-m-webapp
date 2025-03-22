@@ -1,4 +1,4 @@
-import {
+/* import {
   Controller,
   Get,
   Post,
@@ -34,7 +34,7 @@ export class ProfilesController {
   @ApiResponse({ status: 201, description: 'Perfil creado exitosamente' })
   create(@Body() createProfileDto: CreateProfileDto, @Request() req) {
     return this.profilesService.create(req.user.id, createProfileDto);
-  }
+  } */
 
   //@Get()
   //@UseGuards(JwtAuthGuard)
@@ -47,13 +47,13 @@ export class ProfilesController {
   //  return this.profilesService.findAll();
   //}
 
-  @Get('me')
+  /* @Get('me')
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Obtener el perfil del usuario autenticado' })
   @ApiResponse({ status: 200, description: 'Perfil obtenido exitosamente' })
   findMyProfile(@Request() req) {
     return this.profilesService.findOneByUserId(req.user.id);
-  }
+  } */
 
   //@Get(':id')
   //@ApiOperation({ summary: 'Obtener perfil por ID' })
@@ -63,7 +63,7 @@ export class ProfilesController {
   //  return this.profilesService.findOne(id);
   //}
 
-  @Put()
+  /* @Put()
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Actualizar perfil del usuario autenticado' })
   @ApiBody({ type: UpdateProfileDto })
@@ -82,3 +82,4 @@ export class ProfilesController {
     return this.profilesService.remove(id);
   }
 }
+ */

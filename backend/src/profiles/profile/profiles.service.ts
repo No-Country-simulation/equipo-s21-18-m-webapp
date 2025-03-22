@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+/* import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Profile } from '../schema/profile.model';
@@ -59,4 +59,4 @@ export class ProfilesService {
   async remove(id: string): Promise<Profile> {
     return this.profileModel.findByIdAndDelete(id);
   }
-}
+} */

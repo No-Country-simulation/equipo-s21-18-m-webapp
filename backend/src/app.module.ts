@@ -7,7 +7,7 @@ import { UsersModule } from './users/user/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ExercisesModule } from './exercises/exercises/exercises.module';
-import { ProfilesModule } from './profiles/profile/profiles.module';
+//import { ProfilesModule } from './profiles/profile/profiles.module';
 import { TagsModule } from './tags/tags/tags.module';
 import { CategoriesModule } from './categories/categories/categories.module';
 import { RoutinesModule } from './routines/routine/routines.module';
@@ -25,7 +25,7 @@ import { CloudinaryModule } from 'nestjs-cloudinary';
       signOptions: { expiresIn: '1h' },
     }),
     ExercisesModule,
-    ProfilesModule,
+    //ProfilesModule,
     TagsModule,
     CategoriesModule,
     RoutinesModule,
