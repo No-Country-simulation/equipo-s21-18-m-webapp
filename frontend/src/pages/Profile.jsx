@@ -58,6 +58,7 @@ export default function Profile() {
     }
 
     const RUTA = `https://equipo-s21-18-m-webapp.onrender.com/profiles/${userId}`;
+    console.log('userID;',userId)
 
     try {
       const response = await axios.get(RUTA, {

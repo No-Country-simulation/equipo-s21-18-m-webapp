@@ -95,7 +95,10 @@ export default function Navbar() {
               <div className="absolute top-full right-0 mt-2 w-48 rounded-lg bg-white p-2 shadow-lg">
                 <ul className="text-sm text-gray-700">
                   <li className="rounded p-2 hover:bg-gray-100">
-                    <Link to="/profile" className="block w-full" onClick={()=> {setIsOpen(false)}}>
+                    <Link to="/profile" className="block w-full" onClick={()=> {
+                      setIsOpen(false)
+                      navigate('/profile');
+                      }}>
                       <div className="h-full w-full">
                         Perfil
                       </div>

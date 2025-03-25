@@ -163,7 +163,7 @@ export default function Login() {
               },
               pattern: {
                 value:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&¿\-_#"¡\/+;:=<>^´°|¬])([A-Za-z\d$@$!%*?&¿\-_#"¡\/+;:=<>^´°|¬]){8,15}$/,
+                  /^(?=.*[a-zñ])(?=.*[A-ZÑ])(?=.*\d)(?=.*[$@$!%*?&¿\-_#"¡\/+;:=<>^´°|¬])([A-Za-zÑñ\d$@$!%*?&¿\-_#"¡\/+;:=<>^´°|¬]){8,15}$/,
                 message: `Debe contener almenos una mayuscula, minuscula, número, caract. especial '$@$!%*?&'¿-_#"¡/+;:=<>^´°|¬`,
               },
             })}
