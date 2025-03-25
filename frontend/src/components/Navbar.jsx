@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Avatar from "./Avatar";
 import DownArrow from "../icons/DownArrow";
+import MenuBurguer from "./MenuBurguer";
 
 export default function Navbar() {
   const [isLoged, setIsLoged] = useState(false);
@@ -60,7 +61,7 @@ export default function Navbar() {
             <span className="mx-2 font-bold">Fit Lover</span>
           </Link>
 
-          <ul className="flex gap-4">
+          <ul className="flex gap-4 max-md:hidden">
             <li className="hover:text-primary group relative isolate rounded-full transition duration-700">
               <Link to={"/exercises"}>Ejercicios</Link>
             </li>
@@ -76,32 +77,33 @@ export default function Navbar() {
           </ul>
         </div>
 
-        {isLoged ? (
-          <div className="menu-container relative">
-            {" "}
-            {/* Contenedor para menú */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation(); // Evita que el evento de click se propague
-                setIsOpen(!isOpen);
-              }}
-              className="flex cursor-pointer items-center gap-1 rounded-lg p-2 hover:bg-gray-100"
-            >
-              <Avatar />
-              <DownArrow />
-            </button>
-            {/* Menú desplegable */}
-            {isOpen && (
-              <div className="absolute top-full right-0 mt-2 w-48 rounded-lg bg-white p-2 shadow-lg">
+        <div className="menu-container relative">
+          {" "}
+          {/* Contenedor para menú */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation(); // Evita que el evento de click se propague
+              setIsOpen(!isOpen);
+            }}
+            className="flex cursor-pointer items-center gap-1 rounded-lg p-2 hover:bg-gray-100"
+          >
+            {isLoged? <Avatar /> : <MenuBurguer />}
+            <DownArrow />
+          </button>
+          {/* Menú desplegable */}
+          {isOpen && (
+            <div className="absolute top-full right-0 z-10 mt-2 w-48 rounded-lg bg-white p-2 shadow-lg">
+              {isLoged ? (
                 <ul className="text-sm text-gray-700">
                   <li className="rounded p-2 hover:bg-gray-100">
-                    <Link to="/profile" className="block w-full" onClick={()=> {
-                      setIsOpen(false)
-                      navigate('/profile');
-                      }}>
-                      <div className="h-full w-full">
-                        Perfil
-                      </div>
+                    <Link
+                      to="/profile"
+                      className="block w-full"
+                      onClick={() => {
+                        setIsOpen(false);
+                      }}
+                    >
+                      <div className="h-full w-full">Perfil</div>
                     </Link>
                   </li>
                   <li className="rounded p-2 hover:bg-gray-100">
@@ -113,26 +115,99 @@ export default function Navbar() {
                     </button>
                   </li>
                 </ul>
-              </div>
-            )}
-          </div>
-        ) : (
-          <div className="flex gap-4">
-            <Link
-              to={"/login"}
-              className="hover:text-primary h-[2.25rem] content-center rounded-full px-3 transition duration-700"
-            >
-              Iniciar sesión
-            </Link>
-            <Link
-              to={"/register"}
-              className="bg-primary h-[2.25rem] content-center rounded-[6px] px-3 text-white"
-            >
-              Registrarse
-            </Link>
-          </div>
-        )}
+              ) : (
+                <ul className="text-sm text-gray-700">
+                  <li className="rounded p-2 hover:bg-gray-100">
+                    <Link
+                      to={"/login"}
+                      className="block w-full"
+                      onClick={() => {
+                        setIsOpen(false);
+                      }}
+                    >
+                      Iniciar sesión
+                    </Link>
+                  </li>
+                  <li className="rounded p-2 hover:bg-gray-100">
+                    <Link
+                      to={"/register"}
+                      className="block w-full"
+                      onClick={() => {
+                        setIsOpen(false);
+                      }}
+                    >
+                      Registrarse
+                    </Link>
+                  </li>
+                </ul>
+              )}
+              <ul className="mt-2 border-t-[1px] border-[#aaaaaa] text-sm text-gray-700">
+                <li className="rounded p-2 hover:bg-gray-100">
+                  <Link
+                    to={"/exercises"}
+                    className="block w-full"
+                    onClick={() => {
+                      setIsOpen(false);
+                    }}
+                  >
+                    Ejercicios
+                  </Link>
+                </li>
+                <li className="rounded p-2 hover:bg-gray-100">
+                  <Link
+                    to={"/routines"}
+                    className="block w-full"
+                    onClick={() => {
+                      setIsOpen(false);
+                    }}
+                  >
+                    Rutinas
+                  </Link>
+                </li>
+                <li className="rounded p-2 hover:bg-gray-100">
+                  <Link
+                    to={"/dashboard"}
+                    className="block w-full"
+                    onClick={() => {
+                      setIsOpen(false);
+                    }}
+                  >
+                    Panel
+                  </Link>
+                </li>
+                <li className="rounded p-2 hover:bg-gray-100">
+                  <Link
+                    to={"/progress"}
+                    className="block w-full"
+                    onClick={() => {
+                      setIsOpen(false);
+                    }}
+                  >
+                    Progreso
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
+}
+
+{
+  /* <div className="flex gap-4">
+                  <Link
+                    to={"/login"}
+                    className="hover:text-primary h-[2.25rem] content-center rounded-full px-3 transition duration-700"
+                  >
+                    Iniciar sesión
+                  </Link>
+                  <Link
+                    to={"/register"}
+                    className="bg-primary h-[2.25rem] content-center rounded-[6px] px-3 text-white"
+                  >
+                    Registrarse
+                  </Link>
+                </div> */
 }
