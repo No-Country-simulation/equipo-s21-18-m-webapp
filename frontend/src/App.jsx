@@ -13,6 +13,7 @@ import { ExercisesProvider } from "./context/ExercisesProvider";
 import Dashboard from "./pages/Dashboard";
 import { ToastProvider } from "./context/ToastProvider";
 import { RoutinesProvider } from "./context/RoutinesProvider";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -29,8 +30,10 @@ function App() {
               <Route path="/exercise-detail/:id" element={<ExerciseDetail />} />
               <Route path="/routines" element={<RoutineLibrary />} />
               <Route path="/routine-details/:id" element={<RoutineDetails />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/dashboard/*" element={<Dashboard />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/dashboard/*" element={<Dashboard />} />
+              </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Router>
