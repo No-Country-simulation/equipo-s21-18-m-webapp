@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Avatar from "./Avatar";
 import DownArrow from "../icons/DownArrow";
 import MenuBurguer from "./MenuBurguer";
+import useScroll from "../hooks/useScroll";
 
 export default function Navbar() {
   const [isLoged, setIsLoged] = useState(false);
@@ -32,12 +33,11 @@ export default function Navbar() {
   useEffect(() => {
     const token = localStorage.getItem("jwt");
 
-    if (token) {
-      setIsLoged(true);
-    } else {
-      setIsLoged(false); // Si no hay token, el usuario no está logueado
-    }
-  }, [localStorage.getItem("jwt")]);
+    setIsLoged(!!token);
+  }, []);
+
+  // utilizamos el hook para decectar scroll.
+  const isScrolled = useScroll();
 
   // Función para cerrar sesión
   const handleLogout = () => {
@@ -54,7 +54,13 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="font-inter flex h-16 w-full items-center justify-between border-b-[1px] border-[#e5e7eb] px-8 text-[0.875rem] leading-tight font-medium">
+      <div
+        className={`font-inter sticky top-0 left-0 z-50 flex h-16 w-full items-center justify-between border-b-[1px] border-[#e5e7eb] px-8 text-[0.875rem] leading-tight font-medium transition-all duration-300 ${
+          isScrolled
+            ? "bg-opacity-50 bg-transparent backdrop-blur-md"
+            : "bg-white"
+        }`}
+      >
         <div className="flex items-center gap-6">
           <Link to={"/"} className="flex items-center">
             <Logo width={"1.5rem"} height={"1.5rem"} />
@@ -87,7 +93,7 @@ export default function Navbar() {
             }}
             className="flex cursor-pointer items-center gap-1 rounded-lg p-2 hover:bg-gray-100"
           >
-            {isLoged? <Avatar /> : <MenuBurguer />}
+            {isLoged ? <Avatar /> : <MenuBurguer />}
             <DownArrow />
           </button>
           {/* Menú desplegable */}
@@ -193,21 +199,4 @@ export default function Navbar() {
       </div>
     </>
   );
-}
-
-{
-  /* <div className="flex gap-4">
-                  <Link
-                    to={"/login"}
-                    className="hover:text-primary h-[2.25rem] content-center rounded-full px-3 transition duration-700"
-                  >
-                    Iniciar sesión
-                  </Link>
-                  <Link
-                    to={"/register"}
-                    className="bg-primary h-[2.25rem] content-center rounded-[6px] px-3 text-white"
-                  >
-                    Registrarse
-                  </Link>
-                </div> */
 }
